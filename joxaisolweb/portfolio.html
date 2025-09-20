@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio | JoxAI Solutions</title>
+  <meta name="description" content="Casos de éxito de JoxAI Solutions en IA, automatización y desarrollo web.">
+
+  <!-- Estilos: primero base del index, luego animaciones, luego portfolio -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/portfolio.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portafolio | JoxAI Solutions">
+  <meta property="og:description" content="Casos de éxito en IA, automatización y desarrollo web.">
+  <meta property="og:image" content="assets/images/logo.svg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="http://www.joxai.site/portafolio.html">
+</head>
+<body>
+  <!-- Navbar igual al index -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="assets/images/logo.png" alt="JoxAI Solutions">
+        <span>JoxAI Solutions</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html#inicio">Inicio</a></li>
+        <li><a href="index.html#servicios">Servicios</a></li>
+        <li><a href="index.html#nosotros">Nosotros</a></li>
+        <li><a href="portafolio.html" class="active" aria-current="page">Portafolio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="cta-button" href="index.html#contacto">Consulta Gratuita</a>
+    </div>
+  </nav>
+
+  <!-- Hero de página -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="hero-title"><span class="highlight">Nuestro</span> Portafolio</h1>
+      <p class="hero-subtitle">Proyectos reales con impacto medible.</p>
+    </div>
+  </section>
+
+  <!-- Portafolio -->
+  <section class="portfolio">
+    <div class="container">
+      <!-- Filtros -->
+      <div class="portfolio-filters">
+        <button class="filter-button active" data-filter="all">Todos</button>
+        <button class="filter-button" data-filter="ai">IA</button>
+        <button class="filter-button" data-filter="automation">Automatización</button>
+        <button class="filter-button" data-filter="web">Web</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="portfolio-grid">
+        <!-- Item 1 -->
+        <article class="portfolio-item animate-in" data-category="ai">
+          <div class="portfolio-thumb">
+            <img src="assets/images/chatbot-banco.webp" alt="Chatbot bancario con IA" loading="lazy">
+            <div class="portfolio-overlay">
+              <div>
+                <span class="tag">IA</span>
+                <h3>Chatbot Bancario</h3>
+                <p>Redujo el tiempo de respuesta en 62% y elevó el NPS +18.</p>
+              </div>
+              <div class="portfolio-actions">
+                <a class="btn-primary btn-sm" href="proyectos/chatbot-banco.html">Ver caso</a>
+                <a class="btn-secondary btn-sm" href="assets/images/portfolio/chatbot-banco.jpg">Ver imagen</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="portfolio-item" data-category="automation">
+          <div class="portfolio-thumb">
+            <img src="assets/images/portfolio/rpa-facturas.jpg" alt="RPA para procesamiento de facturas" loading="lazy">
+            <div class="portfolio-overlay">
+              <div>
+                <span class="tag">Automatización</span>
+                <h3>RPA de Facturas</h3>
+                <p>OCR + flujos end-to-end con 97% de precisión.</p>
+              </div>
+              <div class="portfolio-actions">
+                <a class="btn-primary btn-sm" href="proyectos/rpa-facturas.html">Ver caso</a>
+                <a class="btn-secondary btn-sm" href="assets/images/portfolio/rpa-facturas.jpg">Ver imagen</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 3 -->
+        <article class="portfolio-item" data-category="web">
+          <div class="portfolio-thumb">
+            <img src="assets/images/portfolio/ecommerce.jpg" alt="E‑commerce optimizado SEO" loading="lazy">
+            <div class="portfolio-overlay">
+              <div>
+                <span class="tag">Web</span>
+                <h3>E‑commerce SEO+</h3>
+                <p>+35% tráfico orgánico y +22% conversión.</p>
+              </div>
+              <div class="portfolio-actions">
+                <a class="btn-primary btn-sm" href="proyectos/ecommerce-seo.html">Ver caso</a>
+                <a class="btn-secondary btn-sm" href="assets/images/portfolio/ecommerce.jpg">Ver imagen</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Paginación (opcional) -->
+      <nav class="pagination" aria-label="Paginación de portafolio">
+        <a href="#" class="page prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="page active">1</a>
+        <a href="#" class="page">2</a>
+        <a href="#" class="page">3</a>
+        <a href="#" class="page next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="cta-inline">
+        <h4>¿Listos para empezar?</h4>
+        <a href="index.html#contacto" class="btn-primary">Hablar con un experto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (puedes reemplazar esto por components/footer.html si lo incluyes por servidor) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 JoxAI Solutions. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/animations.js"></script>
+  <script>
+    // Filtro básico
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.filter-button');
+      const items = document.querySelectorAll('.portfolio-item');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          items.forEach(item => {
+            const cats = (item.dataset.category || '').split(' ');
+            const show = filter === 'all' || cats.includes(filter);
+            item.style.display = show ? '' : 'none';
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
