@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoxAI Solutions - Inteligencia Artificial y Desarrollo Web</title>
+    <meta name="description" content="Soluciones de IA, automatización y desarrollo web para empresas. Transformamos tu negocio con tecnología de vanguardia.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/logo.svg" alt="JoxAI Solutions">
+                <span>JoxAI Solutions</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#portafolio">Portafolio</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="cta-button">Consulta Gratuita</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="highlight">INTELIGENCIA ARTIFICIAL</span>
+                    <br>PARA TU EMPRESA
+                </h1>
+                <p class="hero-subtitle">
+                    Transformamos tu visión en realidad digital con soluciones de IA, 
+                    automatización y desarrollo web de vanguardia.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Explorar Servicios</button>
+                    <button class="btn-secondary">Ver Demo</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div id="three-scene"></div>
+                <div class="floating-cards">
+                    <div class="card-float card-1">
+                        <i class="fas fa-brain"></i>
+                        <span>IA Personalizada</span>
+                    </div>
+                    <div class="card-float card-2">
+                        <i class="fas fa-robot"></i>
+                        <span>Automatización</span>
+                    </div>
+                    <div class="card-float card-3">
+                        <i class="fas fa-code"></i>
+                        <span>Desarrollo Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="particles-container" id="particles"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card" data-service="ai">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Soluciones de IA</h3>
+                    <p>Chatbots inteligentes, análisis predictivo y automatización con inteligencia artificial.</p>
+                    <ul class="service-features">
+                        <li>Chatbots conversacionales</li>
+                        <li>Análisis de datos</li>
+                        <li>Procesamiento de lenguaje</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card" data-service="automation">
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Automatización</h3>
+                    <p>Optimiza tus procesos empresariales con sistemas de automatización inteligentes.</p>
+                    <ul class="service-features">
+                        <li>Flujos de trabajo</li>
+                        <li>Marketing automation</li>
+                        <li>Integración de sistemas</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card" data-service="web">
+                    <div class="card-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Sitios web modernos, responsivos y optimizados para conversión y SEO.</p>
+                    <ul class="service-features">
+                        <li>Diseño UX/UI</li>
+                        <li>SEO avanzado</li>
+                        <li>Desarrollo responsive</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-number" data-target="60">0</div>
+                    <div class="stat-label">Proyectos Completados</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="stat-number" data-target="95">0</div>
+                    <div class="stat-label">% de Éxito</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Soporte 24/7</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2 class="section-title">¿Listo para Transformar tu Empresa?</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Hablemos de tu proyecto</h3>
+                    <p>Obtén una consulta gratuita y descubre cómo podemos impulsar tu negocio.</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>contacto@joxaisolutions.com</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Santo Domingo, República Dominicana</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="Nombre completo" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="tel" placeholder="Teléfono">
+                        <select required>
+                            <option value="">Tipo de servicio</option>
+                            <option value="ai">Soluciones de IA</option>
+                            <option value="automation">Automatización</option>
+                            <option value="web">Desarrollo Web</option>
+                            <option value="package">Paquete Completo</option>
+                        </select>
+                    </div>
+                    <textarea placeholder="Cuéntanos sobre tu proyecto" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.svg" alt="JoxAI Solutions">
+                        <span>JoxAI Solutions</span>
+                    </div>
+                    <p>Transformando empresas con inteligencia artificial y tecnología de vanguardia.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Soluciones de IA</a></li>
+                        <li><a href="#servicios">Automatización</a></li>
+                        <li><a href="#servicios">Desarrollo Web</a></li>
+                        <li><a href="#servicios">Consultoría</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#portafolio">Portafolio</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#careers">Carreras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>contacto@joxaisolutions.com</li>
+                        <li>+1 (555) 123-4567</li>
+                        <li>Santo Domingo, RD</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JoxAI Solutions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/three-scene.js"></script>
+</body>
+</html>
