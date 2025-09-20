@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portafolio | JoxAI Solutions</title>
   <meta name="description" content="Casos de éxito de JoxAI Solutions en IA, automatización y desarrollo web.">
-  <link rel="preload" href="css/styles.css" as="style">
   <link rel="preload" href="js/main.js" as="script">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/portafolio.css">
   <link rel="stylesheet" href="css/animations.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,7 +16,7 @@
   <meta property="og:description" content="Casos de éxito en IA, automatización y desarrollo web.">
   <meta property="og:image" content="assets/images/logo.png">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://tudominio.com/portafolio.html">
+  <link rel="canonical" href="https://joxai.netlify.app/portafolio.html">
 </head>
 <body>
   <!-- Navbar (igual al index, pero con 'Portafolio' activo si usas clase active) -->
@@ -58,6 +57,82 @@
 
       <div class="portfolio-grid">
         <!-- Reutiliza los <article> de la Opción A -->
+          <!-- Portfolio Section -->
+<section id="portafolio" class="portfolio">
+  <div class="container">
+    <h2 class="section-title">Portafolio</h2>
+    <p class="section-subtitle">Casos de éxito en IA, automatización y desarrollo web.</p>
+
+    <!-- Filtros -->
+    <div class="portfolio-filters">
+      <button class="filter-button active" data-filter="all">Todos</button>
+      <button class="filter-button" data-filter="ai">IA</button>
+      <button class="filter-button" data-filter="automation">Automatización</button>
+      <button class="filter-button" data-filter="web">Web</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="portfolio-grid">
+      <!-- Item -->
+      <article class="portfolio-item animate-in" data-category="ai">
+        <div class="portfolio-thumb">
+          <img src="assets/images/portfolio/chatbot-banco.jpg" alt="Chatbot bancario con IA" loading="lazy">
+          <div class="portfolio-overlay">
+            <div>
+              <span class="tag">IA</span>
+              <h3>Chatbot Bancario</h3>
+              <p>Reducción del tiempo de respuesta en 62% y NPS +18.</p>
+            </div>
+            <div class="portfolio-actions">
+              <a class="btn-primary btn-sm" href="../projects/project1.html">Ver caso</a>
+              <a class="btn-secondary btn-sm" href="assets/images/portfolio/chatbot-banco.jpg">Ver imagen</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Duplica más items cambiando data-category: ai | automation | web -->
+      <article class="portfolio-item" data-category="automation">
+        <div class="portfolio-thumb">
+          <img src="assets/images/portfolio/rpa-facturas.jpg" alt="RPA para procesamiento de facturas" loading="lazy">
+          <div class="portfolio-overlay">
+            <div>
+              <span class="tag">Automatización</span>
+              <h3>RPA de Facturas</h3>
+              <p>Procesamiento end-to-end con 97% de precisión OCR.</p>
+            </div>
+            <div class="portfolio-actions">
+              <a class="btn-primary btn-sm" href="proyectos/rpa-facturas.html">Ver caso</a>
+              <a class="btn-secondary btn-sm" href="assets/images/portfolio/rpa-facturas.jpg">Ver imagen</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item" data-category="web">
+        <div class="portfolio-thumb">
+          <img src="assets/images/portfolio/ecommerce.jpg" alt="E‑commerce optimizado SEO" loading="lazy">
+          <div class="portfolio-overlay">
+            <div>
+              <span class="tag">Web</span>
+              <h3>E‑commerce SEO+</h3>
+              <p>+35% tráfico orgánico y +22% conversión.</p>
+            </div>
+            <div class="portfolio-actions">
+              <a class="btn-primary btn-sm" href="proyectos/ecommerce-seo.html">Ver caso</a>
+              <a class="btn-secondary btn-sm" href="assets/images/portfolio/ecommerce.jpg">Ver imagen</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="cta-inline">
+      <h4>¿Quieres un resultado similar?</h4>
+      <a href="#contacto" class="btn-primary">Agenda una consulta</a>
+    </div>
+  </div>
+</section>
       </div>
 
       <!-- Paginación opcional -->
@@ -131,5 +206,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.filter-button');
+    const items = document.querySelectorAll('.portfolio-item');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        items.forEach(item => {
+          const cats = (item.dataset.category || '').split(' ');
+          const show = filter === 'all' || cats.includes(filter);
+          item.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  });
+</script>
 </body>
 </html>

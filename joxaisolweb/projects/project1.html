@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot Bancario con IA | JoxAI Solutions</title>
+  <meta name="description" content="Caso de éxito: Chatbot bancario con IA. Reducción del tiempo de respuesta en 62% y mejora del NPS en 18 puntos." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chatbot Bancario con IA | JoxAI Solutions">
+  <meta property="og:description" content="Reducción del tiempo de respuesta en 62% y NPS +18.">
+  <meta property="og:image" content="../assets/images/portfolio/chatbot-banco.jpg">
+  <meta property="og:type" content="article">
+
+  <!-- Estilos (tus estilos base + portfolio.css) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/portfolio.css">
+  <!-- Si usas animations.css puedes dejarlo también -->
+  <link rel="stylesheet" href="../css/animations.css">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar (puedes copiar la del index) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.png" alt="JoxAI Solutions">
+        <span>JoxAI Solutions</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="../index.html#inicio">Inicio</a></li>
+        <li><a href="../index.html#servicios">Servicios</a></li>
+        <li><a href="../index.html#nosotros">Nosotros</a></li>
+        <li><a href="../portafolio.html" aria-current="page">Portafolio</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="cta-button" href="../index.html#contacto">Consulta Gratuita</a>
+    </div>
+  </nav>
+
+  <!-- Hero del proyecto -->
+  <header class="project-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="../portafolio.html">Portafolio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Chatbot Bancario con IA</span>
+      </nav>
+
+      <h1 class="hero-title"><span class="highlight">Chatbot</span> Bancario con IA</h1>
+      <p class="hero-subtitle">Atención 24/7, reducción de tiempos de respuesta y mejora de satisfacción del cliente.</p>
+
+      <!-- Metadatos del proyecto -->
+      <div class="project-meta">
+        <div class="meta-item">
+          <span class="meta-label">Cliente</span>
+          <span class="meta-value">Banco Atlántico</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Industria</span>
+          <span class="meta-value">Finanzas</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Servicios</span>
+          <span class="meta-value"><span class="tag">IA</span> <span class="tag">Automatización</span></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Stack</span>
+          <span class="meta-value">LLM, RAG, Node.js, AWS</span>
+        </div>
+      </div>
+
+      <!-- Imagen/Media principal -->
+      <div class="project-hero-media">
+        <img src="../assets/images/portfolio/chatbot-banco.jpg" alt="Chatbot bancario con IA en producción" loading="lazy">
+      </div>
+
+      <!-- KPIs destacados -->
+      <div class="kpi-cards">
+        <div class="kpi-card">
+          <div class="kpi-number">-62%</div>
+          <div class="kpi-label">Tiempo de respuesta</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-number">+18</div>
+          <div class="kpi-label">NPS</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-number">24/7</div>
+          <div class="kpi-label">Atención disponible</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Secciones del caso -->
+  <main class="project-content">
+    <section class="project-section">
+      <div class="container section-grid">
+        <div>
+          <h2 class="section-title">El Reto</h2>
+          <p class="text-muted">El banco enfrentaba picos de consultas que saturaban a los agentes, con tiempos de espera prolongados y experiencia inconsistente fuera del horario laboral.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <i class="fas fa-circle-exclamation"></i>
+            <div>
+              <h4>Alta demanda</h4>
+              <p class="text-muted">Más de 8k consultas diarias y estacionalidad marcada.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-headset"></i>
+            <div>
+              <h4>Capacidad limitada</h4>
+              <p class="text-muted">SLAs comprometidos en fines de semana y noches.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-halved"></i>
+            <div>
+              <h4>Seguridad</h4>
+              <p class="text-muted">Cumplimiento y privacidad de datos sensibles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section alt">
+      <div class="container section-grid">
+        <div>
+          <h2 class="section-title">Nuestra Solución</h2>
+          <p class="text-muted">Implementamos un chatbot con LLM, retrieval-augmented generation y handoffs a agentes humanos, integrado a core bancario vía APIs.</p>
+          <ul class="bulleted">
+            <li>Intenciones y NER personalizados para productos del banco.</li>
+            <li>RAG con documentación interna y políticas actualizadas.</li>
+            <li>Escalamiento a humano con contexto completo.</li>
+            <li>Panel de analítica para intents, CSAT y tiempos.</li>
+          </ul>
+        </div>
+        <div class="illustration-card">
+          <img src="../assets/images/portfolio/dashboard-ia.jpg" alt="Dashboard y analíticas del chatbot" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <h2 class="section-title">Impacto</h2>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <i class="fas fa-gauge-high"></i>
+            <div>
+              <h4>Resolución 1er contacto</h4>
+              <p class="text-muted">73% de consultas resueltas sin derivación.</p>
+            </div>
+          </div>
+          <div class="impact-item">
+            <i class="fas fa-user-check"></i>
+            <div>
+              <h4>Mejor experiencia</h4>
+              <p class="text-muted">CSAT promedio 4.6/5 en 90 días.</p>
+            </div>
+          </div>
+          <div class="impact-item">
+            <i class="fas fa-piggy-bank"></i>
+            <div>
+              <h4>Optimización de costos</h4>
+              <p class="text-muted">Ahorro operativo estimado 28%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline del proceso -->
+    <section class="project-section alt">
+      <div class="container">
+        <h2 class="section-title">Proceso</h2>
+        <ol class="timeline">
+          <li class="timeline-step">
+            <span class="step-dot"></span>
+            <div class="step-content">
+              <h4>Descubrimiento</h4>
+              <p class="text-muted">Mapeo de intents, datos y restricciones de compliance.</p>
+            </div>
+          </li>
+          <li class="timeline-step">
+            <span class="step-dot"></span>
+            <div class="step-content">
+              <h4>Arquitectura</h4>
+              <p class="text-muted">Diseño de RAG, seguridad y observabilidad.</p>
+            </div>
+          </li>
+          <li class="timeline-step">
+            <span class="step-dot"></span>
+            <div class="step-content">
+              <h4>Implementación</h4>
+              <p class="text-muted">Integración APIs core, handoff y entrenamiento.</p>
+            </div>
+          </li>
+          <li class="timeline-step">
+            <span class="step-dot"></span>
+            <div class="step-content">
+              <h4>Optimización</h4>
+              <p class="text-muted">A/B testing, tuning de prompts y mejoras continuas.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Galería -->
+    <section class="project-section">
+      <div class="container">
+        <h2 class="section-title">Galería</h2>
+        <div class="gallery-grid">
+          <a href="../assets/images/portfolio/chatbot-banco.jpg" class="gallery-item" data-lightbox="proyecto">
+            <img src="../assets/images/portfolio/chatbot-banco.jpg" alt="Pantalla del chatbot" loading="lazy">
+          </a>
+          <a href="../assets/images/portfolio/marketing-automation.jpg" class="gallery-item" data-lightbox="proyecto">
+            <img src="../assets/images/portfolio/marketing-automation.jpg" alt="Secuencias automatizadas" loading="lazy">
+          </a>
+          <a href="../assets/images/portfolio/dashboard-ia.jpg" class="gallery-item" data-lightbox="proyecto">
+            <img src="../assets/images/portfolio/dashboard-ia.jpg" alt="Dashboard de analítica" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="project-section alt">
+      <div class="container">
+        <blockquote class="testimonial">
+          <p>“La implementación del chatbot superó nuestros KPIs y mejoró notablemente la satisfacción del cliente.”</p>
+          <footer>
+            <img src="../assets/images/people/avatar1.png" alt="Directora CX" />
+            <div>
+              <strong>María G.</strong>
+              <span>Directora de Experiencia, Banco Atlántico</span>
+            </div>
+          </footer>
+        </blockquote>
+
+        <div class="cta-inline">
+          <h4>¿Quieres un resultado similar?</h4>
+          <a href="../index.html#contacto" class="btn-primary">Habla con un experto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Relacionados -->
+    <section class="project-section">
+      <div class="container">
+        <h2 class="section-title">Proyectos relacionados</h2>
+        <div class="portfolio-grid">
+          <article class="portfolio-item" data-category="automation">
+            <div class="portfolio-thumb">
+              <img src="../assets/images/portfolio/rpa-facturas.jpg" alt="RPA Facturas" loading="lazy">
+              <div class="portfolio-overlay">
+                <div>
+                  <span class="tag">Automatización</span>
+                  <h3>RPA de Facturas</h3>
+                  <p>OCR + flujos end-to-end con 97% de precisión.</p>
+                </div>
+                <div class="portfolio-actions">
+                  <a class="btn-primary btn-sm" href="./rpa-facturas.html">Ver caso</a>
+                  <a class="btn-secondary btn-sm" href="../assets/images/portfolio/rpa-facturas.jpg">Ver imagen</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item" data-category="web">
+            <div class="portfolio-thumb">
+              <img src="../assets/images/portfolio/ecommerce.jpg" alt="E-commerce SEO+" loading="lazy">
+              <div class="portfolio-overlay">
+                <div>
+                  <span class="tag">Web</span>
+                  <h3>E‑commerce SEO+</h3>
+                  <p>+35% tráfico orgánico; +22% conversión.</p>
+                </div>
+                <div class="portfolio-actions">
+                  <a class="btn-primary btn-sm" href="./ecommerce-seo.html">Ver caso</a>
+                  <a class="btn-secondary btn-sm" href="../assets/images/portfolio/ecommerce.jpg">Ver imagen</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (puedes copiar el del index) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 JoxAI Solutions. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS Lightbox sencillo -->
+  <script>
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[data-lightbox]');
+      if (!link) return;
+      e.preventDefault();
+      const src = link.getAttribute('href');
+
+      let overlay = document.querySelector('.lightbox-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'lightbox-overlay';
+        overlay.innerHTML = '<div class="lightbox-content"><button class="lightbox-close" aria-label="Cerrar">&times;</button><img alt=""></div>';
+        document.body.appendChild(overlay);
+      }
+      overlay.querySelector('img').src = src;
+      overlay.classList.add('show');
+
+      overlay.querySelector('.lightbox-close').onclick = () => overlay.classList.remove('show');
+      overlay.onclick = (ev) => { if (ev.target === overlay) overlay.classList.remove('show'); };
+      document.addEventListener('keydown', function esc(e2){ if (e2.key === 'Escape'){ overlay.classList.remove('show'); document.removeEventListener('keydown', esc); }});
+    });
+  </script>
+</body>
+</html>
