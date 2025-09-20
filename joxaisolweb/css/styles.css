@@ -158,7 +158,8 @@ body {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 680;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .highlight {
