@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio | JoxAI Solutions</title>
+  <meta name="description" content="Casos de éxito de JoxAI Solutions en IA, automatización y desarrollo web.">
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Open Graph (corrigiendo atributos) -->
+  <meta property="og:title" content="Portafolio | JoxAI Solutions">
+  <meta property="og:description" content="Casos de éxito en IA, automatización y desarrollo web.">
+  <meta property="og:image" content="assets/images/logo.png">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://tudominio.com/portafolio.html">
+</head>
+<body>
+  <!-- Navbar (igual al index, pero con 'Portafolio' activo si usas clase active) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="assets/images/logo.png" alt="JoxAI Solutions">
+        <span>JoxAI Solutions</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html#inicio">Inicio</a></li>
+        <li><a href="index.html#servicios">Servicios</a></li>
+        <li><a href="index.html#nosotros">Nosotros</a></li>
+        <li><a href="portafolio.html" class="active" aria-current="page">Portafolio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="cta-button" href="index.html#contacto">Consulta Gratuita</a>
+    </div>
+  </nav>
+
+  <!-- Hero de página -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="hero-title"><span class="highlight">Nuestro</span> Portafolio</h1>
+      <p class="hero-subtitle">Proyectos reales con impacto medible.</p>
+    </div>
+  </section>
+
+  <!-- Filtros + Grid (puedes reutilizar exactamente el bloque del index) -->
+  <section class="portfolio">
+    <div class="container">
+      <div class="portfolio-filters">
+        <button class="filter-button active" data-filter="all">Todos</button>
+        <button class="filter-button" data-filter="ai">IA</button>
+        <button class="filter-button" data-filter="automation">Automatización</button>
+        <button class="filter-button" data-filter="web">Web</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <!-- Reutiliza los <article> de la Opción A -->
+      </div>
+
+      <!-- Paginación opcional -->
+      <nav class="pagination" aria-label="Paginación de portafolio">
+        <a href="#" class="page prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="page active">1</a>
+        <a href="#" class="page">2</a>
+        <a href="#" class="page">3</a>
+        <a href="#" class="page next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="cta-inline">
+        <h4>¿Listos para empezar?</h4>
+        <a href="index.html#contacto" class="btn-primary">Hablar con un experto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (puedes copiar el del index) -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.png" alt="JoxAI Solutions">
+                        <span>JoxAI Solutions</span>
+                    </div>
+                    <p>Transformando empresas con inteligencia artificial y tecnología de vanguardia.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/jose-de-la-rosa"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/joxai.solutions?"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/joxe22"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Soluciones de IA</a></li>
+                        <li><a href="#servicios">Automatización</a></li>
+                        <li><a href="#servicios">Desarrollo Web</a></li>
+                        <li><a href="#servicios">Consultoría</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="index.html#nosotros">Sobre Nosotros</a></li>
+                        <li><a href="index.html#portafolio">Portafolio</a></li>
+                        <li><a href="index.html#blog">Blog</a></li>
+                        <li><a href="index.html#careers">Carreras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>joxai.solutions@outlook.com</li>
+                        <li>+1 (809) 949-0077</li>
+                        <li>Santo Domingo, RD</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JoxAI Solutions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
