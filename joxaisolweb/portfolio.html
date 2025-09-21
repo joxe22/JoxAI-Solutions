@@ -29,14 +29,20 @@
         <img src="assets/images/logo.png" alt="JoxAI Solutions">
         <span>JoxAI Solutions</span>
       </div>
-      <ul class="nav-menu">
-        <li><a href="index.html#inicio">Inicio</a></li>
-        <li><a href="index.html#servicios">Servicios</a></li>
-        <li><a href="index.html#nosotros">Nosotros</a></li>
-        <li><a href="portfolio.html" class="active" aria-current="page">Portafolio</a></li>
-        <li><a href="index.html#contacto">Contacto</a></li>
+  
+      <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+  
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="portfolio.html" target="_self">Portafolio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <a class="cta-button" href="index.html#contacto">Consulta Gratuita</a>
+  
+      <button class="cta-button">Consulta Gratuita</button>
     </div>
   </nav>
 
@@ -162,6 +168,25 @@
           });
         });
       });
+    });
+  </script>
+  <!--SCRIPT PARA EL NUEVO NAVBAR-->
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('nav-menu');
+  
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+  
+    // Cierra el menú al navegar
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
     });
   </script>
 </body>
