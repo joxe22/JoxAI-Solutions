@@ -18,6 +18,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="./css/chatbot.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -46,7 +47,7 @@
             <li><a href="#contacto">Contacto</a></li>
           </ul>
       
-          <button class="cta-button" >Consulta Gratuita</button>
+          <button class="cta-button" href="#contacto">Consulta Gratuita</button>
         </div>
       </nav>
 
@@ -297,5 +298,23 @@
           }
         });
       </script>
+
+      <!--NUEVO CHATBOT-->
+      <div id="chatbot-toggle-button">
+        <i class="fas fa-robot"></i> </div>
+    
+    <div id="chatbot-container" class="hidden">
+        <div class="chatbot-header">
+            <span class="chatbot-title">Asistente JoxAI</span>
+            <button id="close-chatbot-btn">&times;</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            </div>
+        <div class="chatbot-footer">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." disabled>
+            <button id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <script defer src="./js/chatbot.js"></script>
 </body>
 </html>
