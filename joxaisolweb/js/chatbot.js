@@ -108,7 +108,7 @@ function handleCitaFlow() {
     const calendlyWidget = `
         <div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent;">
             <div class="calendly-inline-widget" 
-                 data-url="https://calendly.com/TUCALENDLY/30min" 
+                 data-url="https://calendly.com/joxai-solutions/30min" 
                  style="min-width:320px;height:450px;">
             </div>
         </div>
@@ -139,7 +139,7 @@ function handleCitaFlow() {
 function handleTourFlow() {
     displayMessage("¡Claro! El tour te llevará a una página especial donde podrás explorar nuestros proyectos más recientes y casos de éxito.", 'bot');
     
-    const tourLink = "TU_URL_DEL_TOUR_DE_PROYECTOS"; // <-- REEMPLAZA ESTO
+    const tourLink = "www.joxai.site/portfolio"; // <-- REEMPLAZA ESTO
     
     const linkHTML = `<a href="${tourLink}" target="_blank" class="option-button" style="text-align: center; background-color: #28a745;">
                           Iniciar Tour de Proyectos
