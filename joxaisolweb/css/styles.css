@@ -609,6 +609,52 @@ body {
 }
 
 /* ==========================================
+   FORM NOTIFICATION DESIGN
+========================================== */
+
+#notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification {
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInOut 5s forwards; /* Animación para aparecer y desaparecer */
+}
+
+.notification.success {
+  background-color: #28a745; /* Verde para éxito */
+}
+
+.notification.error {
+  background-color: #dc3545; /* Rojo para error */
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Opcional: estilo para el honeypot si lo quieres ocultar bien */
+.hidden {
+  position: absolute;
+  left: -9999px; /* Mueve el elemento fuera de la pantalla */
+}
+
+/* ==========================================
    RESPONSIVE DESIGN
 ========================================== */
 @media (max-width: 768px) {

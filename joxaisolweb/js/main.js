@@ -152,6 +152,27 @@ function animateCounter(element, target) {
     }, 16);
 }
 
+// Función para mostrar notificaciones (necesitarás el CSS para que se vean bien)
+function showNotification(message, type) {
+    const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) {
+        console.error('Contenedor de notificaciones no encontrado.');
+        return;
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`; // Clases CSS para estilo (ej: .notification, .success, .error)
+    notification.textContent = message;
+
+    notificationContainer.appendChild(notification);
+
+    // Ocultar la notificación después de unos segundos
+    setTimeout(() => {
+        notification.remove();
+    }, 5000); // 5 segundos
+}
+
+
 // ==========================================
 // FORMULARIO DE CONTACTO
 // ==========================================
@@ -163,50 +184,43 @@ function initContactForm() {
     }
 }
 
-function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    // Obtener datos del formulario
-    const formData = new FormData(e.target);
-    const formObj = Object.fromEntries(formData);
-    
-    // Simulación de envío (aquí integrarías con tu backend)
-    showNotification('Mensaje enviado correctamente. Te contactaremos pronto.', 'success');
-    
-    // Limpiar formulario
-    e.target.reset();
+async function handleFormSubmit(e) {
+    e.preventDefault(); // ¡Importante! Prevenir el envío estándar del navegador
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Codificar los datos del formulario para el envío
+    // Netlify espera los datos en formato URL-encoded si se envía con AJAX
+    const encoded = new URLSearchParams(formData).toString();
+
+    try {
+        // La URL de envío para Netlify Forms con AJAX es siempre la misma URL de la página
+        // desde donde se envía el formulario. Netlify intercepta el POST.
+        const response = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encoded,
+        });
+
+        if (response.ok) {
+            showNotification('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
+            form.reset(); // Limpiar el formulario
+        } else {
+            // Manejar posibles errores del servidor de Netlify (ej. configuración incorrecta del form)
+            showNotification('Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.', 'error');
+            // Opcional: obtener más detalles del error si Netlify los proporciona
+            // const errorText = await response.text();
+            // console.error("Error de Netlify:", errorText);
+        }
+    } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        showNotification('Ocurrió un error de red. Por favor, verifica tu conexión e inténtalo de nuevo.', 'error');
+    }
 }
 
-function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    // Estilos de notificación
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#f44336'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Remover notificación después de 5 segundos
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 5000);
-}
+// Asegúrate de llamar a initContactForm cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', initContactForm);
 
 // ==========================================
 // SCROLL SUAVE

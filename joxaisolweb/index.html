@@ -46,7 +46,7 @@
             <li><a href="#contacto">Contacto</a></li>
           </ul>
       
-          <button class="cta-button">Consulta Gratuita</button>
+          <button class="cta-button" >Consulta Gratuita</button>
         </div>
       </nav>
 
@@ -197,14 +197,16 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" data-netlify="true" netlify value="contact">
+                <form class="contact-form" name="contact" method="POST" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact" />
+    
                     <div class="form-row">
-                        <input type="text" placeholder="Nombre completo" required>
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" name="nombre" placeholder="Nombre completo" required>
+                        <input type="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-row">
-                        <input type="tel" placeholder="Teléfono">
-                        <select required>
+                        <input type="tel" name="telefono" placeholder="Teléfono">
+                        <select name="servicio" required>
                             <option value="">Tipo de servicio</option>
                             <option value="ai">Soluciones de IA</option>
                             <option value="automation">Automatización</option>
@@ -212,12 +214,14 @@
                             <option value="package">Paquete Completo</option>
                         </select>
                     </div>
-                    <textarea placeholder="Cuéntanos sobre tu proyecto. Eg. Mi empresa se dedica..." rows="5" required></textarea>
+                    <textarea name="proyecto" placeholder="Cuéntanos sobre tu proyecto. Eg. Mi empresa se dedica..." rows="5" required></textarea>
                     <button type="submit" class="btn-primary">Enviar Mensaje</button>
                 </form>
             </div>
         </div>
     </section>
+    
+    <div id="notification-container"></div>
 
     <!-- Footer -->
     <footer class="footer">
