@@ -54,8 +54,13 @@
         .nav-container {
             display: flex;
             justify-content: space-between;
+            text-align: center;
             align-items: center;
-            padding: 1rem 0;
+            height: 80px;   
+            margin: 0 auto;
+            padding: 2rem 0;
+            margin-right: auto;
+            
         }
 
         .nav-logo {
@@ -73,7 +78,16 @@
 
         .nav-menu {
             display: flex;
+            align-items: center;
             list-style: none;
+            text-align: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
         }
 
         .nav-menu li {
@@ -700,10 +714,6 @@
     <!-- Navegación -->
     <nav class="navbar">
         <div class="container nav-container">
-            <div class="nav-logo">
-                <img src="assets/images/logo.png" alt="JoxAI Solutions">
-                <span>JoxAI Solutions</span>
-            </div>
             <ul class="nav-menu">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="portfolio.html">Portafolio</a></li>

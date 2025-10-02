@@ -1,0 +1,389 @@
+/* Paleta de Colores y Variables */
+:root {
+    --dark-bg: #040810; 
+    --card-bg: #0C1322; 
+    --primary-color: #59b6ef; 
+    --secondary-color: #9ac8ee; 
+    --text-light: #E0E0E0; 
+    --neon-shadow: 0 0 20px rgba(0, 119, 255, 1), 0 0 10px rgba(0, 119, 255, 0.8); 
+    --particle-color: rgba(200, 230, 255, 1); 
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ================== HEADER Y GEOMETRÍA DINÁMICA (VISIBILIDAD MEJORADA) ================== */
+.main-header {
+    position: relative;
+    /* Aumento de altura para simular la sección principal de tu index */
+    height: 400px; 
+    width: 100%;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, #060d1b 100%); 
+    overflow: hidden; 
+    /* Centrado del Título */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0; /* Ya no necesitamos el padding-bottom grande */
+}
+
+.page-title{
+    position: relative;
+    z-index: 5;
+    /* Centrado por el flexbox del .main-header */
+    text-align: center;
+    font-size: 3.5em; /* Un poco más grande para el impacto */
+    margin-top: -50px; /* Ajuste manual para el centrado visual */
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 119, 255, 1); 
+}
+
+.geometric-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* Muy importante para que no bloquee el navbar */
+}
+
+/* Figuras geométricas: Alto contraste y brillo */
+.shape {
+    position: absolute;
+    width: 25px; 
+    height: 25px; 
+    border-radius: 50%;
+    background: rgba(45, 156, 219, 0.7); 
+    box-shadow: 0 0 15px rgba(45, 156, 219, 1); 
+    animation: moveShapes 30s infinite linear alternate;
+    z-index: 0; 
+}
+
+.cube {
+    width: 40px; 
+    height: 40px;
+    top: 15%;
+    left: 10%;
+    transform: rotate(45deg);
+    border-radius: 6px;
+    animation-delay: 2s;
+}
+.circle{
+    width: 40px; 
+    height: 40px;
+    top: 15%;
+    left: 10%;
+    transform: rotate(45deg);
+    border-radius: 6px;
+    animation-delay: 2s;
+}
+.triangle{
+    width: 40px; 
+    height: 40px;
+    top: 15%;
+    left: 10%;
+    transform: rotate(45deg);
+    border-radius: 6px;
+    animation-delay: 2s;
+}
+
+.line-connect {
+    width: 4px; 
+    height: 200px; 
+    top: 40%;
+    right: 5%;
+    background: rgba(45, 156, 219, 0.6); 
+    border-radius: 0;
+    animation-delay: 8s;
+}
+
+/* Partículas Flotantes (Los puntos) - ¡Efecto Estelar! */
+.dot {
+    width: 3px; 
+    height: 3px; 
+    background: transparent; 
+    border-radius: 50%;
+    /* BOX-SHADOW MUY CLARO Y FUERTE para que se vean */
+    box-shadow: 0 0 2px 1px var(--particle-color), 0 0 5px var(--particle-color); 
+    animation: moveShapes 40s infinite linear alternate, twinkle 3s infinite ease-in-out; 
+    animation-delay: 4s;
+}
+
+@keyframes moveShapes {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    50% { transform: translate(50px, -50px) rotate(90deg); opacity: 0.6; } 
+    100% { transform: translate(0, 0) rotate(180deg); opacity: 0.8; }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; transform: scale(0.8); }
+}
+
+
+/* ================== NAVBAR CENTRAL (Se ajustó la posición) ================== */
+.nav-links-container {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+/* ... (El resto de estilos de navbar, cards y modal se mantienen sin cambios críticos) ... */
+
+/* Estilos de la tarjeta para usar la sombra neón más fuerte */
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02); 
+    box-shadow: var(--neon-shadow), 0 10px 40px rgba(0, 0, 0, 0.9); 
+}
+
+/* ================== NAVBAR CENTRAL Y BOTONES ANIMADOS (Sin cambios) ================== */
+.navbar {
+    position: absolute; /* Posición absoluta para flotar sobre el header */
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(4, 8, 16, 0.95); /* Fondo para que los links se lean bien */
+}
+
+.nav-links-container {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 50%;
+    background: var(--primary-color);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.btn-demo {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.5);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.btn-demo::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 50%;
+    background: var(--primary-color);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+.btn-demo:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.btn-demo:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 119, 255, 0.8);
+}
+
+
+/* ================== SECCIÓN CARDS (Sin cambios) ================== */
+.projects-tour {
+    padding: 50px;
+    text-align: center;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 40px;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 350px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
+    border: 1px solid rgba(45, 156, 219, 0.1); 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); 
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02); 
+    box-shadow: var(--neon-shadow), 0 10px 40px rgba(0, 0, 0, 0.9); 
+}
+
+.card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.5s ease;
+}
+
+.project-card:hover .card-image {
+    filter: brightness(0.6) blur(1px);
+}
+
+.card-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.card-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.card-content p {
+    color: var(--secondary-color);
+}
+
+.btn-see-more {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) perspective(1px) scale(0.6); 
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 119, 255, 0.7);
+}
+
+.project-card:hover .btn-see-more {
+    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+/* ================== MODAL DE DETALLES ================== */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95); 
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #1a202c;
+    margin: 3% auto;
+    padding: 40px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1100px;
+    box-shadow: var(--neon-shadow);
+}
+.modal-content h2 { color: var(--primary-color); }
+.modal-content h3 { color: var(--secondary-color); margin-top: 20px; }
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.close-btn:hover, .close-btn:focus {
+    color: var(--primary-color);
+}
+
+/* AJUSTE PARA CENTRAR Y AMPLIAR EL VIDEO EN EL MODAL */
+.video-container {
+    margin: 20px 0;
+    aspect-ratio: 16 / 9;
+    width: 100%; /* Asegura que ocupe el 100% del ancho disponible */
+}
+
+/* NUEVA REGLA: El iframe ocupa 100% del contenedor 16:9 */
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px; /* Borde elegante */
+}
+
+.modal-gallery-thumbs {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal-gallery-thumbs img {
+    width: 100px;
+    height: 70px;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+.modal-gallery-thumbs img:hover {
+    opacity: 1;
+    border-color: var(--primary-color);
+}

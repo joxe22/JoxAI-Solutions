@@ -1,0 +1,215 @@
+/* ===== CAPA DE FONDOS GEOMÉTRICOS DINÁMICOS ===== */
+/* NO MODIFICA ELEMENTOS EXISTENTES - Solo añade capas visuales de fondo */
+
+.shapes-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Cambiado a 1 para estar detrás del contenido */
+  overflow: hidden;
+}
+
+/* Contenedor de cada figura + label */
+.geom {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Labels colgantes */
+.geom-label {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Soporte para Safari */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 20px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  opacity: 0.9;
+  transform-origin: center;
+  animation: label-float 8s ease-in-out infinite;
+}
+
+/* Línea conectora entre figura y label */
+.geom-label::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background: linear-gradient(to bottom, rgba(74, 144, 226, 0.4), rgba(107, 182, 255, 0.3));
+}
+
+/* Figuras geométricas */
+.geom-shape {
+  width: 60px;
+  height: 60px;
+  opacity: 0.22;
+  border-radius: 4px;
+  position: relative;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+/* Triángulo */
+.shape-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: linear-gradient(135deg, #4a90e2, #6bb6ff); /* Usando colores directos */
+  animation-name: float-triangle;
+}
+
+/* Círculo */
+.shape-circle {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #4a90e2, #6bb6ff);
+  animation-name: float-circle;
+}
+
+/* Cuadrado */
+.shape-square {
+  background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+  animation-name: float-square;
+}
+
+/* Hexágono */
+.shape-hexagon {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+  animation-name: float-hexagon;
+}
+
+/* Animaciones específicas para cada forma */
+@keyframes float-triangle {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  25% { transform: translateY(-15px) rotate(5deg) scale(1.05); }
+  50% { transform: translateY(10px) rotate(-3deg) scale(0.98); }
+  75% { transform: translateY(-8px) rotate(2deg) scale(1.02); }
+}
+
+@keyframes float-circle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  33% { transform: translateY(-12px) scale(1.08); }
+  66% { transform: translateY(8px) scale(0.95); }
+}
+
+@keyframes float-square {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-18px) rotate(8deg); }
+  50% { transform: translateY(5px) rotate(-5deg); }
+  75% { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes float-hexagon {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  20% { transform: translateY(-20px) rotate(15deg) scale(1.1); }
+  40% { transform: translateY(5px) rotate(-10deg) scale(0.95); }
+  60% { transform: translateY(-12px) rotate(8deg) scale(1.05); }
+  80% { transform: translateY(3px) rotate(-5deg) scale(0.98); }
+}
+
+/* Animación de flotación para labels */
+@keyframes label-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.03); }
+}
+
+/* Efectos hover (solo escritorio) */
+@media (hover: hover) and (pointer: fine) {
+  .geom:hover .geom-shape {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.4));
+    transform: scale(1.15);
+    transition: all 0.4s ease;
+  }
+  
+  .geom:hover .geom-label {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transform: scale(1.05);
+    transition: all 0.4s ease;
+  }
+}
+
+/* Posicionamiento específico para cada figura */
+.geom-1 {
+  top: 25%;
+  left: 12%;
+  animation-delay: 0s;
+}
+
+.geom-2 {
+  top: 65%;
+  left: 80%;
+  animation-delay: 2.5s;
+}
+
+.geom-3 {
+  top: 75%;
+  left: 18%;
+  animation-delay: 5s;
+}
+
+.geom-4 {
+  top: 35%;
+  left: 75%;
+  animation-delay: 7.5s;
+}
+
+/* Capa de partículas sutiles */
+.particles-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(74, 144, 226, 0.15);
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100px) translateX(30px) rotate(360deg); opacity: 0; }
+}
+
+/* RESPONSIVE: Simplificar en móviles */
+@media (max-width: 900px) {
+  .shapes-layer {
+    display: none; /* Ocultar completamente en móviles para mejor rendimiento */
+  }
+}
+
+/* Fallback para preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .geom-shape,
+  .geom-label,
+  .particle {
+    animation: none !important;
+  }
+  
+  .geom-shape {
+    opacity: 0.15;
+  }
+}

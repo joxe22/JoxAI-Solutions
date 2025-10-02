@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación - JoxAI Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/survey.css">
+</head>
+<body>
+    <div class="survey-page">
+        <div class="survey-header">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="JoxAI Solutions">
+                <span>JoxAI Solutions</span>
+            </div>
+        </div>
+
+        <div class="survey-container">
+            <!-- Formulario con Netlify -->
+            <form name="survey-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="surveyForm">
+                <!-- Campo oculto para Netlify -->
+                <input type="hidden" name="form-name" value="survey-feedback" />
+                
+                <!-- Honeypot anti-spam -->
+                <p style="display: none;">
+                    <label>Don't fill: <input name="bot-field" /></label>
+                </p>
+                
+                <div class="modal-overlay" id="exitModal" style="display: flex; position: relative; background: transparent; backdrop-filter: none; padding: 0;">
+                    <div class="modal-container" style="position: relative; transform: none; opacity: 1; max-width: 100%; max-height: none;">
+                        <div class="modal-header">
+                            <h2>¡Tu opinión es importante! 🎯</h2>
+                            <p>Ayúdanos a mejorar tu experiencia</p>
+                        </div>
+                        
+                        <div class="modal-body" id="formSection">
+                            <!-- Evaluación con Emojis -->
+                            <div class="emoji-section">
+                                <div class="emoji-title">¿Cómo fue tu experiencia general?</div>
+                                <div class="emoji-container">
+                                    <button type="button" class="emoji-button" data-rating="1" onclick="selectEmoji(this)">😞</button>
+                                    <button type="button" class="emoji-button" data-rating="2" onclick="selectEmoji(this)">😕</button>
+                                    <button type="button" class="emoji-button" data-rating="3" onclick="selectEmoji(this)">😐</button>
+                                    <button type="button" class="emoji-button" data-rating="4" onclick="selectEmoji(this)">😊</button>
+                                    <button type="button" class="emoji-button" data-rating="5" onclick="selectEmoji(this)">😍</button>
+                                </div>
+                                <div class="emoji-label">Muy Mala - Mala - Regular - Buena - Excelente</div>
+                                <input type="hidden" name="experiencia-general" id="experienceInput" required />
+                            </div>
+
+                            <!-- Pregunta de facilidad de navegación -->
+                            <div class="question-section">
+                                <div class="question-title">¿Qué tan fácil fue navegar por nuestra página?</div>
+                                <div class="rating-container">
+                                    <button type="button" class="rating-button" onclick="selectRating(this, 'navigation')">Muy difícil</button>
+                                    <button type="button" class="rating-button" onclick="selectRating(this, 'navigation')">Difícil</button>
+                                    <button type="button" class="rating-button" onclick="selectRating(this, 'navigation')">Normal</button>
+                                    <button type="button" class="rating-button" onclick="selectRating(this, 'navigation')">Fácil</button>
+                                    <button type="button" class="rating-button" onclick="selectRating(this, 'navigation')">Muy fácil</button>
+                                </div>
+                                <input type="hidden" name="facilidad-navegacion" id="navigationInput" />
+                            </div>
+
+                            <!-- Pregunta de funcionalidades -->
+                            <div class="question-section">
+                                <div class="question-title">¿Qué funcionalidades te gustaron más?</div>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                        <input type="checkbox" id="design" name="funcionalidades[]" value="Diseño visual atractivo">
+                                        <label for="design">Diseño visual atractivo</label>
+                                    </div>
+                                    <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                        <input type="checkbox" id="speed" name="funcionalidades[]" value="Velocidad de carga">
+                                        <label for="speed">Velocidad de carga</label>
+                                    </div>
+                                    <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                        <input type="checkbox" id="content" name="funcionalidades[]" value="Calidad del contenido">
+                                        <label for="content">Calidad del contenido</label>
+                                    </div>
+                                    <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                        <input type="checkbox" id="usability" name="funcionalidades[]" value="Facilidad de uso">
+                                        <label for="usability">Facilidad de uso</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comentarios adicionales -->
+                            <div class="textarea-container">
+                                <label class="textarea-label" for="comments">¿Algún comentario adicional?</label>
+                                <textarea name="comentarios" id="comments" placeholder="Nos encantaría conocer tu opinión..."></textarea>
+                            </div>
+
+                            <!-- Botones de acción -->
+                            <div class="submit-section">
+                                <button type="button" class="btn btn-secondary" onclick="window.close()">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="submitFeedback()">Enviar Evaluación</button>
+                            </div>
+                        </div>
+
+                        <!-- Mensaje de éxito -->
+                        <div class="success-message" id="successSection">
+                            <div class="success-icon">✓</div>
+                            <div class="success-title">¡Gracias por tu feedback!</div>
+                            <div class="success-text">Tu opinión nos ayuda a mejorar cada día</div>
+                            <div class="submit-section" style="margin-top: 30px;">
+                                <button type="button" class="btn btn-primary" onclick="window.close()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="particles" id="particles"></div>
+    </div>
+    
+    <script src="./js/survey.js"></script>
+</body>
+</html>

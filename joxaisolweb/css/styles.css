@@ -83,6 +83,8 @@ body {
 
 .nav-menu {
   display: flex;
+  align-items: center;
+  margin: auto;
   list-style: none;
   gap: 2rem;
 }
@@ -697,4 +699,8 @@ body {
   .stats-grid {
     grid-template-columns: 1fr;
   }
-}
+} 
+
+
+
+

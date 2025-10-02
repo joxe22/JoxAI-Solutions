@@ -316,5 +316,261 @@
         </div>
     </div>
     <script defer src="./js/chatbot.js"></script>
+
+<!-- Widget flotante de Survey -->
+<div id="survey-widget" class="survey-widget hidden">
+    <div class="survey-widget-content">
+        <button class="survey-close-btn" onclick="closeSurveyWidget()">&times;</button>
+        <div class="survey-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="survey-text">
+            <h4>¿Qué te pareció?</h4>
+            <p>Tu opinión nos ayuda a mejorar</p>
+        </div>
+        <button class="survey-cta-btn" onclick="openSurveyModal()">
+            Evalúanos
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+    <div class="survey-pulse"></div>
+</div>
+
+<!-- Estilos del Widget -->
+<style>
+.survey-widget {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    z-index: 999;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.survey-widget.hidden {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8);
+    pointer-events: none;
+}
+
+.survey-widget.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+.survey-widget-content {
+    background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 40px rgba(74, 144, 226, 0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 200px;
+    animation: wiggle 3s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+}
+
+.survey-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: rgba(74, 144, 226, 0.3);
+    animation: pulse 2s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.survey-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.survey-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.survey-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.survey-text {
+    text-align: center;
+}
+
+.survey-text h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 700;
+}
+
+.survey-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.survey-cta-btn {
+    background: white;
+    color: #4a90e2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.survey-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.survey-cta-btn i {
+    transition: transform 0.3s ease;
+}
+
+.survey-cta-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .survey-widget {
+        bottom: 80px;
+        right: 20px;
+    }
+    
+    .survey-widget-content {
+        padding: 1rem;
+        min-width: 180px;
+    }
+    
+    .survey-text h4 {
+        font-size: 1rem;
+    }
+    
+    .survey-text p {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
+<!-- Script del Widget -->
+<script>
+    let widgetShown = false;
+    let userIdleTimer;
+    
+    // Mostrar widget cuando el usuario está inactivo
+    function showSurveyWidget() {
+        if (!widgetShown) {
+            const widget = document.getElementById('survey-widget');
+            widget.classList.remove('hidden');
+            widget.classList.add('show');
+            widgetShown = true;
+        }
+    }
+    
+    // Ocultar widget cuando el usuario interactúa
+    function hideSurveyWidget() {
+        const widget = document.getElementById('survey-widget');
+        widget.classList.remove('show');
+        widget.classList.add('hidden');
+    }
+    
+    // Cerrar widget permanentemente
+    function closeSurveyWidget() {
+        hideSurveyWidget();
+        widgetShown = false;
+        clearTimeout(userIdleTimer);
+    }
+    
+    // Abrir modal de survey en nueva ventana
+    function openSurveyModal() {
+        console.log('Abrir modal de survey en nueva ventana');
+        window.open('survey.html', 'Survey', 'width=700,height=800,scrollbars=yes');
+    }
+    
+    // Reset del timer cuando el usuario interactúa
+    function resetIdleTimer() {
+        // Solo ocultar si el widget no ha sido mostrado aún
+        if (!widgetShown) {
+            clearTimeout(userIdleTimer);
+            
+            // Mostrar widget después de 30 segundos de inactividad
+            userIdleTimer = setTimeout(() => {
+                showSurveyWidget();
+            }, 5000);
+        }
+    }
+    
+    // Eventos para detectar interacción
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+        document.addEventListener(event, resetIdleTimer, true);
+    });
+    
+    // Iniciar el timer cuando la página carga
+    window.addEventListener('load', () => {
+        // Esperar 5 segundos después de cargar la página, luego iniciar el timer de inactividad
+        setTimeout(() => {
+            resetIdleTimer();
+        }, 50000);
+    });
+    </script>
 </body>
 </html>
