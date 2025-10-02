@@ -4,14 +4,14 @@
 :root {
   --primary-dark: #1a1d29;
   --secondary-dark: #252837;
-  --accent-blue: #4a90e2;
-  --accent-light-blue: #6bb6ff;
-  --text-primary: #ffffff;
+  --accent-blue: #b1c9e4;
+  --accent-light-blue: #48c8f3;
+  --text-primary: #dee3ff;
   --text-secondary: #b8bcc8;
   --text-muted: #8892b0;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --gradient-primary: linear-gradient(135deg, #4a90e2, #6bb6ff);
+  --gradient-primary: linear-gradient(135deg, #6c85f1, #3d7dbc);
   --gradient-dark: linear-gradient(135deg, #1a1d29, #252837);
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
   --shadow-glow: 0 0 20px rgba(74, 144, 226, 0.3);

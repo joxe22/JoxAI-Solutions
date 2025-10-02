@@ -276,9 +276,10 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
     <script src="js/three-scene.js"></script>
+    <script src="./survey.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
     <!--SCRIPT PARA EL NUEVO NAVBAR-->
     <script>
         const toggle = document.querySelector('.nav-toggle');
@@ -318,6 +319,7 @@
     <script defer src="./js/chatbot.js"></script>
 
 <!-- Widget flotante de Survey -->
+<!-- WIDGET FLOTANTE DE SURVEY - Reemplaza el código existente en index.html -->
 <div id="survey-widget" class="survey-widget hidden">
     <div class="survey-widget-content">
         <button class="survey-close-btn" onclick="closeSurveyWidget()">&times;</button>
@@ -336,218 +338,555 @@
     <div class="survey-pulse"></div>
 </div>
 
-<!-- Estilos del Widget -->
-<style>
-.survey-widget {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    z-index: 999;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.survey-widget.hidden {
-    opacity: 0;
-    transform: translateY(100px) scale(0.8);
-    pointer-events: none;
-}
-
-.survey-widget.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: all;
-}
-
-.survey-widget-content {
-    background: linear-gradient(135deg, #4a90e2, #6bb6ff);
-    border-radius: 16px;
-    padding: 1.25rem;
-    box-shadow: 0 10px 40px rgba(74, 144, 226, 0.4);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 200px;
-    animation: wiggle 3s ease-in-out infinite;
-}
-
-@keyframes wiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-2deg); }
-    75% { transform: rotate(2deg); }
-}
-
-.survey-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    background: rgba(74, 144, 226, 0.3);
-    animation: pulse 2s ease-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pulse {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
-    }
-}
-
-.survey-close-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    line-height: 1;
-}
-
-.survey-close-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg);
-}
-
-.survey-icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: white;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.survey-text {
-    text-align: center;
-}
-
-.survey-text h4 {
-    color: white;
-    font-size: 1.1rem;
-    margin: 0 0 0.25rem 0;
-    font-weight: 700;
-}
-
-.survey-text p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.85rem;
-    margin: 0;
-}
-
-.survey-cta-btn {
-    background: white;
-    color: #4a90e2;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
-}
-
-.survey-cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.survey-cta-btn i {
-    transition: transform 0.3s ease;
-}
-
-.survey-cta-btn:hover i {
-    transform: translateX(5px);
-}
-
-<script>
-    let widgetShown = false;
-    let userIdleTimer;
-    
-    // Mostrar widget cuando el usuario está inactivo
-    function showSurveyWidget() {
-        if (!widgetShown) {
-            const widget = document.getElementById('survey-widget');
-            widget.classList.remove('hidden');
-            widget.classList.add('show');
-            widgetShown = true;
-        }
-    }
-    
-    // Ocultar widget cuando el usuario interactúa
-    function hideSurveyWidget() {
-        const widget = document.getElementById('survey-widget');
-        widget.classList.remove('show');
-        widget.classList.add('hidden');
-    }
-    
-    // Cerrar widget permanentemente
-    function closeSurveyWidget() {
-        hideSurveyWidget();
-        widgetShown = false;
-        clearTimeout(userIdleTimer);
-    }
-    
-    // Abrir modal de survey en nueva ventana
-    function openSurveyModal() {
-        console.log('Abrir modal de survey en nueva ventana');
-        window.open('survey.html', 'Survey', 'width=700,height=800,scrollbars=yes');
-    }
-    
-    // Reset del timer cuando el usuario interactúa
-    function resetIdleTimer() {
-        // Solo ocultar si el widget no ha sido mostrado aún
-        if (!widgetShown) {
-            clearTimeout(userIdleTimer);
+<!-- MODAL DE SURVEY INTEGRADO -->
+<div class="modal-overlay" id="surveyModal" style="display: none;">
+    <div class="modal-container">
+        <form name="survey-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="surveyForm">
+            <!-- Campo oculto para Netlify -->
+            <input type="hidden" name="form-name" value="survey-feedback" />
             
-            // Mostrar widget después de 30 segundos de inactividad
-            userIdleTimer = setTimeout(() => {
-                showSurveyWidget();
-            }, 5000);
-        }
+            <!-- Honeypot anti-spam -->
+            <p style="display: none;">
+                <label>Don't fill: <input name="bot-field" /></label>
+            </p>
+            
+            <div class="modal-header">
+                <h2>¡Tu opinión es importante! 🎯</h2>
+                <p>Ayúdanos a mejorar tu experiencia</p>
+                <button type="button" class="modal-close" onclick="closeSurveyModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body" id="formSection">
+                <!-- Evaluación con Emojis -->
+                <div class="emoji-section">
+                    <div class="emoji-title">¿Cómo fue tu experiencia general?</div>
+                    <div class="emoji-container">
+                        <button type="button" class="emoji-button" data-rating="1" onclick="selectEmoji(this, event)">😞</button>
+                        <button type="button" class="emoji-button" data-rating="2" onclick="selectEmoji(this, event)">😕</button>
+                        <button type="button" class="emoji-button" data-rating="3" onclick="selectEmoji(this, event)">😐</button>
+                        <button type="button" class="emoji-button" data-rating="4" onclick="selectEmoji(this, event)">😊</button>
+                        <button type="button" class="emoji-button" data-rating="5" onclick="selectEmoji(this, event)">😍</button>
+                    </div>
+                    <div class="emoji-label">Muy Mala - Mala - Regular - Buena - Excelente</div>
+                    <input type="hidden" name="experiencia-general" id="experienceInput" required />
+                </div>
+
+                <!-- Pregunta de facilidad de navegación -->
+                <div class="question-section">
+                    <div class="question-title">¿Qué tan fácil fue navegar por nuestra página?</div>
+                    <div class="rating-container">
+                        <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Muy difícil</button>
+                        <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Difícil</button>
+                        <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Normal</button>
+                        <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Fácil</button>
+                        <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Muy fácil</button>
+                    </div>
+                    <input type="hidden" name="facilidad-navegacion" id="navigationInput" />
+                </div>
+
+                <!-- Pregunta de funcionalidades -->
+                <div class="question-section">
+                    <div class="question-title">¿Qué funcionalidades te gustaron más?</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" id="design" name="funcionalidades" value="Diseño visual atractivo">
+                            <label for="design">Diseño visual atractivo</label>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" id="speed" name="funcionalidades" value="Velocidad de carga">
+                            <label for="speed">Velocidad de carga</label>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" id="content" name="funcionalidades" value="Calidad del contenido">
+                            <label for="content">Calidad del contenido</label>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" id="usability" name="funcionalidades" value="Facilidad de uso">
+                            <label for="usability">Facilidad de uso</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comentarios adicionales -->
+                <div class="textarea-container">
+                    <label class="textarea-label" for="comments">¿Algún comentario adicional?</label>
+                    <textarea name="comentarios" id="comments" placeholder="Nos encantaría conocer tu opinión..."></textarea>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="submit-section">
+                    <button type="button" class="btn btn-secondary" onclick="closeSurveyModal()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="submitFeedback(event)">Enviar Evaluación</button>
+                </div>
+            </div>
+
+            <!-- Mensaje de éxito -->
+            <div class="success-message" id="successSection" style="display: none;">
+                <div class="success-icon">✓</div>
+                <div class="success-title">¡Gracias por tu feedback!</div>
+                <div class="success-text">Tu opinión nos ayuda a mejorar cada día</div>
+                <div class="submit-section" style="margin-top: 30px;">
+                    <button type="button" class="btn btn-primary" onclick="closeSurveyModal()">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========================================
+     WIDGET DE SURVEY COMPLETO - VERSIÓN FUNCIONAL
+     Copia TODO este bloque y pégalo en index.html
+     justo ANTES del cierre de </body>
+======================================== -->
+
+<!-- ESTILOS DEL WIDGET -->
+<style>
+    /* Widget Flotante */
+    .survey-widget {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 999;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
     
-    // Eventos para detectar interacción
-    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-        document.addEventListener(event, resetIdleTimer, true);
-    });
+    .survey-widget.hidden {
+        opacity: 0;
+        transform: translateY(100px) scale(0.8);
+        pointer-events: none;
+    }
     
-    // Iniciar el timer cuando la página carga
-    window.addEventListener('load', () => {
-        // Esperar 5 segundos después de cargar la página, luego iniciar el timer de inactividad
-        setTimeout(() => {
-            resetIdleTimer();
-        }, 50000);
-    });
-    </script>
+    .survey-widget.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+    
+    .survey-widget-content {
+        background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+        border-radius: 16px;
+        padding: 1.25rem;
+        box-shadow: 0 10px 40px rgba(74, 144, 226, 0.4);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 200px;
+    }
+    
+    .survey-close-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+    
+    .survey-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    .survey-text {
+        text-align: center;
+    }
+    
+    .survey-text h4 {
+        color: white;
+        font-size: 1.1rem;
+        margin: 0 0 0.25rem 0;
+        font-weight: 700;
+    }
+    
+    .survey-text p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+    
+    .survey-cta-btn {
+        background: white;
+        color: #4a90e2;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 29, 41, 0.95);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+    }
+    
+    .modal-container {
+        background: #252837;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        width: 100%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-header {
+        background: linear-gradient(135deg, #1a1d29, #252837);
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    
+    .modal-header h2 {
+        color: #4a90e2;
+        font-size: 1.75rem;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .modal-header p {
+        color: #b8bcc8;
+        margin: 0;
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #b8bcc8;
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        line-height: 1;
+    }
+    
+    .modal-body {
+        padding: 2rem;
+    }
+    
+    .emoji-section,
+    .question-section,
+    .textarea-container {
+        margin-bottom: 2rem;
+    }
+    
+    .emoji-title,
+    .question-title,
+    .textarea-label {
+        color: #ffffff;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        display: block;
+    }
+    
+    .emoji-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .emoji-button {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        font-size: 1.75rem;
+        cursor: pointer;
+    }
+    
+    .emoji-button.selected {
+        background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+        border-color: #4a90e2;
+        transform: scale(1.15);
+    }
+    
+    .emoji-label {
+        text-align: center;
+        color: #b8bcc8;
+        font-size: 0.85rem;
+    }
+    
+    .rating-container {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .rating-button {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #b8bcc8;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        flex: 1;
+        min-width: 90px;
+    }
+    
+    .rating-button.selected {
+        background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+        color: white;
+        border-color: #4a90e2;
+    }
+    
+    .checkbox-group {
+        display: grid;
+        gap: 0.75rem;
+    }
+    
+    .checkbox-option {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    .checkbox-option.selected {
+        border-color: #4a90e2;
+        background: rgba(74, 144, 226, 0.15);
+    }
+    
+    .checkbox-option input[type="checkbox"] {
+        margin-right: 0.75rem;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .checkbox-option label {
+        color: #ffffff;
+        cursor: pointer;
+        flex: 1;
+    }
+    
+    .textarea-container textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        color: #ffffff;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .submit-section {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+    
+    .btn {
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-size: 1rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+        color: white;
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .success-message {
+        display: none;
+        text-align: center;
+        padding: 3rem 2rem;
+    }
+    
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    .success-title {
+        color: #ffffff;
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .success-text {
+        color: #b8bcc8;
+        font-size: 1.1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .emoji-button {
+            width: 50px;
+            height: 50px;
+        }
+        .rating-container {
+            flex-direction: column;
+        }
+        .submit-section {
+            flex-direction: column-reverse;
+        }
+        .btn {
+            width: 100%;
+        }
+    }
+    </style>
+    
+    <!-- HTML DEL WIDGET -->
+    <div id="survey-widget" class="survey-widget hidden">
+        <div class="survey-widget-content">
+            <button class="survey-close-btn" onclick="closeSurveyWidget()">&times;</button>
+            <div class="survey-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="survey-text">
+                <h4>¿Qué te pareció?</h4>
+                <p>Tu opinión nos ayuda a mejorar</p>
+            </div>
+            <button class="survey-cta-btn" onclick="openSurveyModal()">
+                Evalúanos
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- MODAL DEL SURVEY -->
+    <div class="modal-overlay" id="surveyModal">
+        <div class="modal-container">
+            <form name="survey-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="surveyForm">
+                <input type="hidden" name="form-name" value="survey-feedback" />
+                <p style="display: none;">
+                    <label>Don't fill: <input name="bot-field" /></label>
+                </p>
+                
+                <div class="modal-header">
+                    <h2>¡Tu opinión es importante! 🎯</h2>
+                    <p>Ayúdanos a mejorar tu experiencia</p>
+                    <button type="button" class="modal-close" onclick="closeSurveyModal()">&times;</button>
+                </div>
+                
+                <div class="modal-body" id="formSection">
+                    <div class="emoji-section">
+                        <div class="emoji-title">¿Cómo fue tu experiencia general?</div>
+                        <div class="emoji-container">
+                            <button type="button" class="emoji-button" data-rating="1" onclick="selectEmoji(this, event)">😞</button>
+                            <button type="button" class="emoji-button" data-rating="2" onclick="selectEmoji(this, event)">😕</button>
+                            <button type="button" class="emoji-button" data-rating="3" onclick="selectEmoji(this, event)">😐</button>
+                            <button type="button" class="emoji-button" data-rating="4" onclick="selectEmoji(this, event)">😊</button>
+                            <button type="button" class="emoji-button" data-rating="5" onclick="selectEmoji(this, event)">😍</button>
+                        </div>
+                        <div class="emoji-label">Muy Mala - Mala - Regular - Buena - Excelente</div>
+                        <input type="hidden" name="experiencia-general" id="experienceInput" required />
+                    </div>
+    
+                    <div class="question-section">
+                        <div class="question-title">¿Qué tan fácil fue navegar por nuestra página?</div>
+                        <div class="rating-container">
+                            <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Muy difícil</button>
+                            <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Difícil</button>
+                            <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Normal</button>
+                            <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Fácil</button>
+                            <button type="button" class="rating-button" onclick="selectRating(this, 'navigation', event)">Muy fácil</button>
+                        </div>
+                        <input type="hidden" name="facilidad-navegacion" id="navigationInput" />
+                    </div>
+    
+                    <div class="question-section">
+                        <div class="question-title">¿Qué funcionalidades te gustaron más?</div>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                <input type="checkbox" id="design" name="funcionalidades" value="Diseño visual atractivo">
+                                <label for="design">Diseño visual atractivo</label>
+                            </div>
+                            <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                <input type="checkbox" id="speed" name="funcionalidades" value="Velocidad de carga">
+                                <label for="speed">Velocidad de carga</label>
+                            </div>
+                            <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                <input type="checkbox" id="content" name="funcionalidades" value="Calidad del contenido">
+                                <label for="content">Calidad del contenido</label>
+                            </div>
+                            <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                                <input type="checkbox" id="usability" name="funcionalidades" value="Facilidad de uso">
+                                <label for="usability">Facilidad de uso</label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="textarea-container">
+                        <label class="textarea-label" for="comments">¿Algún comentario adicional?</label>
+                        <textarea name="comentarios" id="comments" placeholder="Nos encantaría conocer tu opinión..."></textarea>
+                    </div>
+    
+                    <div class="submit-section">
+                        <button type="button" class="btn btn-secondary" onclick="closeSurveyModal()">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="submitFeedback(event)">Enviar Evaluación</button>
+                    </div>
+                </div>
+    
+                <div class="success-message" id="successSection">
+                    <div class="success-icon">✓</div>
+                    <div class="success-title">¡Gracias por tu feedback!</div>
+                    <div class="success-text">Tu opinión nos ayuda a mejorar cada día</div>
+                    <div class="submit-section" style="margin-top: 30px;">
+                        <button type="button" class="btn btn-primary" onclick="closeSurveyModal()">Cerrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- JAVASCRIPT (Ya lo tienes en el documento que me enviaste) -->
+    <!-- Usa el script que ya funciona del documento que me compartiste -->
+
+
 </body>
 </html>

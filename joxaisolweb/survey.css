@@ -1,9 +1,161 @@
 /* ==========================================
-   MODAL DE EVALUACIÓN - ESTILOS AISLADOS
+   WIDGET FLOTANTE DE SURVEY
 ========================================== */
+.survey-widget {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    z-index: 999;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-/* Modal Overlay - Mayor especificidad para evitar conflictos */
-.modal-overlay#exitModal {
+.survey-widget.hidden {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8);
+    pointer-events: none;
+}
+
+.survey-widget.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+.survey-widget-content {
+    background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 40px rgba(74, 144, 226, 0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 200px;
+    animation: wiggle 3s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+}
+
+.survey-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: rgba(74, 144, 226, 0.3);
+    animation: pulse 2s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.survey-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.survey-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.survey-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.survey-text {
+    text-align: center;
+}
+
+.survey-text h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 700;
+}
+
+.survey-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.survey-cta-btn {
+    background: white;
+    color: #4a90e2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.survey-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.survey-cta-btn i {
+    transition: transform 0.3s ease;
+}
+
+.survey-cta-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* ==========================================
+   MODAL DE EVALUACIÓN
+========================================== */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,16 +172,14 @@
     transition: opacity 0.3s ease;
 }
 
-.modal-overlay#exitModal.show {
-    display: flex;
+.modal-overlay[style*="display: flex"] {
     opacity: 1;
 }
 
-/* Modal Container */
-.modal-overlay .modal-container {
-    background: var(--secondary-dark, #252837);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
-    border-radius: var(--border-radius, 12px);
+.modal-container {
+    background: #252837;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     width: 100%;
     max-width: 600px;
     max-height: 90vh;
@@ -40,41 +190,41 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-overlay .modal-container.animate-in {
+.modal-container.animate-in {
     transform: scale(1) translateY(0);
     opacity: 1;
 }
 
-.modal-overlay .modal-container.animate-out {
+.modal-container.animate-out {
     transform: scale(0.9) translateY(20px);
     opacity: 0;
 }
 
-/* Custom scrollbar para el modal */
-.modal-overlay .modal-container::-webkit-scrollbar {
+/* Scrollbar personalizado */
+.modal-container::-webkit-scrollbar {
     width: 8px;
 }
 
-.modal-overlay .modal-container::-webkit-scrollbar-track {
+.modal-container::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
 }
 
-.modal-overlay .modal-container::-webkit-scrollbar-thumb {
-    background: var(--accent-blue, #4a90e2);
+.modal-container::-webkit-scrollbar-thumb {
+    background: #4a90e2;
     border-radius: 4px;
 }
 
 /* Modal Header */
-.modal-overlay .modal-header {
+.modal-header {
     background: linear-gradient(135deg, #1a1d29, #252837);
     padding: 2rem;
-    border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
 }
 
-.modal-overlay .modal-header h2 {
-    color: var(--text-primary, #ffffff);
+.modal-header h2 {
+    color: #ffffff;
     font-size: 1.75rem;
     margin: 0 0 0.5rem 0;
     background: linear-gradient(135deg, #4a90e2, #6bb6ff);
@@ -84,19 +234,19 @@
     font-weight: 700;
 }
 
-.modal-overlay .modal-header p {
-    color: var(--text-secondary, #b8bcc8);
+.modal-header p {
+    color: #b8bcc8;
     font-size: 1rem;
     margin: 0;
 }
 
-.modal-overlay .close-button {
+.modal-close {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-secondary, #b8bcc8);
+    color: #b8bcc8;
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -109,30 +259,30 @@
     line-height: 1;
 }
 
-.modal-overlay .close-button:hover {
-    color: var(--accent-blue, #4a90e2);
+.modal-close:hover {
+    color: #4a90e2;
     background: rgba(74, 144, 226, 0.1);
-    border-color: var(--accent-blue, #4a90e2);
+    border-color: #4a90e2;
     transform: rotate(90deg);
 }
 
 /* Modal Body */
-.modal-overlay .modal-body {
+.modal-body {
     padding: 2rem;
 }
 
-.modal-overlay .emoji-section,
-.modal-overlay .question-section,
-.modal-overlay .textarea-container {
+.emoji-section,
+.question-section,
+.textarea-container {
     margin-bottom: 2rem;
     animation: fadeInUp 0.5s ease forwards;
     opacity: 0;
 }
 
-.modal-overlay .emoji-section { animation-delay: 0.1s; }
-.modal-overlay .question-section:nth-of-type(2) { animation-delay: 0.2s; }
-.modal-overlay .question-section:nth-of-type(3) { animation-delay: 0.3s; }
-.modal-overlay .textarea-container { animation-delay: 0.4s; }
+.emoji-section { animation-delay: 0.1s; }
+.question-section:nth-of-type(2) { animation-delay: 0.2s; }
+.question-section:nth-of-type(3) { animation-delay: 0.3s; }
+.textarea-container { animation-delay: 0.4s; }
 
 @keyframes fadeInUp {
     from {
@@ -146,10 +296,10 @@
 }
 
 /* Títulos de secciones */
-.modal-overlay .emoji-title,
-.modal-overlay .question-title,
-.modal-overlay .textarea-label {
-    color: var(--text-primary, #ffffff);
+.emoji-title,
+.question-title,
+.textarea-label {
+    color: #ffffff;
     font-weight: 600;
     margin-bottom: 1rem;
     font-size: 1.1rem;
@@ -157,14 +307,14 @@
 }
 
 /* Emoji Buttons */
-.modal-overlay .emoji-container {
+.emoji-container {
     display: flex;
     justify-content: space-between;
     gap: 0.75rem;
     margin-bottom: 0.75rem;
 }
 
-.modal-overlay .emoji-button {
+.emoji-button {
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
@@ -179,39 +329,39 @@
     flex-shrink: 0;
 }
 
-.modal-overlay .emoji-button:hover {
-    border-color: var(--accent-blue, #4a90e2);
+.emoji-button:hover {
+    border-color: #4a90e2;
     transform: translateY(-5px) scale(1.05);
     background: rgba(74, 144, 226, 0.1);
 }
 
-.modal-overlay .emoji-button.selected {
+.emoji-button.selected {
     background: linear-gradient(135deg, #4a90e2, #6bb6ff);
-    border-color: var(--accent-blue, #4a90e2);
+    border-color: #4a90e2;
     transform: scale(1.15);
     box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
 }
 
-.modal-overlay .emoji-label {
+.emoji-label {
     text-align: center;
-    color: var(--text-secondary, #b8bcc8);
+    color: #b8bcc8;
     font-size: 0.85rem;
     line-height: 1.4;
 }
 
 /* Rating Buttons */
-.modal-overlay .rating-container {
+.rating-container {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
     flex-wrap: wrap;
 }
 
-.modal-overlay .rating-button {
+.rating-button {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    color: var(--text-secondary, #b8bcc8);
+    color: #b8bcc8;
     padding: 0.75rem 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -222,27 +372,27 @@
     font-weight: 500;
 }
 
-.modal-overlay .rating-button:hover {
-    border-color: var(--accent-blue, #4a90e2);
-    color: var(--text-primary, #ffffff);
+.rating-button:hover {
+    border-color: #4a90e2;
+    color: #ffffff;
     background: rgba(74, 144, 226, 0.1);
     transform: translateY(-2px);
 }
 
-.modal-overlay .rating-button.selected {
+.rating-button.selected {
     background: linear-gradient(135deg, #4a90e2, #6bb6ff);
     color: white;
-    border-color: var(--accent-blue, #4a90e2);
+    border-color: #4a90e2;
     transform: scale(1.05);
 }
 
 /* Checkbox Group */
-.modal-overlay .checkbox-group {
+.checkbox-group {
     display: grid;
     gap: 0.75rem;
 }
 
-.modal-overlay .checkbox-option {
+.checkbox-option {
     display: flex;
     align-items: center;
     padding: 1rem;
@@ -253,40 +403,40 @@
     transition: all 0.3s ease;
 }
 
-.modal-overlay .checkbox-option:hover {
-    border-color: var(--accent-blue, #4a90e2);
+.checkbox-option:hover {
+    border-color: #4a90e2;
     background: rgba(74, 144, 226, 0.05);
     transform: translateX(5px);
 }
 
-.modal-overlay .checkbox-option.selected {
-    border-color: var(--accent-blue, #4a90e2);
+.checkbox-option.selected {
+    border-color: #4a90e2;
     background: rgba(74, 144, 226, 0.15);
 }
 
-.modal-overlay .checkbox-option input[type="checkbox"] {
+.checkbox-option input[type="checkbox"] {
     margin-right: 0.75rem;
     width: 20px;
     height: 20px;
-    accent-color: var(--accent-blue, #4a90e2);
+    accent-color: #4a90e2;
     cursor: pointer;
 }
 
-.modal-overlay .checkbox-option label {
-    color: var(--text-primary, #ffffff);
+.checkbox-option label {
+    color: #ffffff;
     cursor: pointer;
     flex: 1;
     font-weight: 500;
 }
 
 /* Textarea */
-.modal-overlay .textarea-container textarea {
+.textarea-container textarea {
     width: 100%;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 1rem;
-    color: var(--text-primary, #ffffff);
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
     resize: vertical;
     min-height: 100px;
@@ -294,26 +444,26 @@
     font-size: 1rem;
 }
 
-.modal-overlay .textarea-container textarea:focus {
+.textarea-container textarea:focus {
     outline: none;
-    border-color: var(--accent-blue, #4a90e2);
+    border-color: #4a90e2;
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
     background: rgba(255, 255, 255, 0.08);
 }
 
-.modal-overlay .textarea-container textarea::placeholder {
-    color: var(--text-muted, #8892b0);
+.textarea-container textarea::placeholder {
+    color: #8892b0;
 }
 
 /* Submit Section */
-.modal-overlay .submit-section {
+.submit-section {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
     margin-top: 2rem;
 }
 
-.modal-overlay .btn {
+.btn {
     padding: 14px 28px;
     border-radius: 8px;
     font-weight: 600;
@@ -324,31 +474,30 @@
     font-family: 'Inter', sans-serif;
 }
 
-.modal-overlay .btn-primary {
+.btn-primary {
     background: linear-gradient(135deg, #4a90e2, #6bb6ff);
     color: white;
     box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
 }
 
-.modal-overlay .btn-primary:hover {
+.btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
 }
 
-.modal-overlay .btn-secondary {
+.btn-secondary {
     background: transparent;
-    color: var(--text-primary, #ffffff);
+    color: #ffffff;
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.modal-overlay .btn-secondary:hover {
-    border-color: var(--accent-blue, #4a90e2);
+.btn-secondary:hover {
+    border-color: #4a90e2;
     background: rgba(74, 144, 226, 0.1);
 }
 
 /* Success Message */
-.modal-overlay .success-message {
-    display: none;
+.success-message {
     text-align: center;
     padding: 3rem 2rem;
     opacity: 0;
@@ -356,11 +505,12 @@
     transition: all 0.3s ease;
 }
 
-.modal-overlay .success-message.show {
-    display: block;
+.success-message[style*="display: block"] {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.modal-overlay .success-icon {
+.success-icon {
     width: 80px;
     height: 80px;
     background: linear-gradient(135deg, #4a90e2, #6bb6ff);
@@ -386,84 +536,119 @@
     }
 }
 
-.modal-overlay .success-title {
-    color: var(--text-primary, #ffffff);
+.success-title {
+    color: #ffffff;
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
 
-.modal-overlay .success-text {
-    color: var(--text-secondary, #b8bcc8);
+.success-text {
+    color: #b8bcc8;
     font-size: 1.1rem;
 }
 
-/* Responsive Design */
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
 @media (max-width: 768px) {
-    .modal-overlay .modal-container {
+    .survey-widget {
+        bottom: 80px;
+        right: 20px;
+    }
+    
+    .survey-widget-content {
+        padding: 1rem;
+        min-width: 180px;
+    }
+    
+    .survey-text h4 {
+        font-size: 1rem;
+    }
+    
+    .survey-text p {
+        font-size: 0.8rem;
+    }
+    
+    .modal-container {
         max-height: 95vh;
         max-width: 95%;
     }
     
-    .modal-overlay .modal-header {
+    .modal-header {
         padding: 1.5rem;
     }
     
-    .modal-overlay .modal-header h2 {
+    .modal-header h2 {
         font-size: 1.5rem;
     }
     
-    .modal-overlay .modal-body {
+    .modal-body {
         padding: 1.5rem;
     }
     
-    .modal-overlay .emoji-container {
+    .emoji-container {
         gap: 0.5rem;
     }
     
-    .modal-overlay .emoji-button {
+    .emoji-button {
         width: 50px;
         height: 50px;
         font-size: 1.5rem;
     }
     
-    .modal-overlay .rating-container {
+    .rating-container {
         flex-direction: column;
     }
     
-    .modal-overlay .rating-button {
+    .rating-button {
         min-width: 100%;
     }
     
-    .modal-overlay .submit-section {
+    .submit-section {
         flex-direction: column-reverse;
     }
     
-    .modal-overlay .btn {
+    .btn {
         width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .modal-overlay#exitModal {
+    .modal-overlay {
         padding: 10px;
     }
     
-    .modal-overlay .modal-header {
+    .modal-header {
         padding: 1.25rem;
     }
     
-    .modal-overlay .modal-header h2 {
+    .modal-header h2 {
         font-size: 1.35rem;
     }
     
-    .modal-overlay .emoji-button {
+    .emoji-button {
         width: 45px;
         height: 45px;
         font-size: 1.35rem;
     }
     
-    .modal-overlay .emoji-label {
+    .emoji-label {
         font-size: 0.75rem;
+    }
+}
+
+/* Preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .survey-widget,
+    .survey-widget-content,
+    .modal-container,
+    .emoji-button,
+    .rating-button,
+    .btn,
+    .survey-pulse,
+    .survey-icon {
+        animation: none !important;
+        transition: none !important;
     }
 }

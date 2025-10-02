@@ -67,7 +67,7 @@
   overflow: hidden;
 }
 .filter-button:hover {
-  color: #fff;
+  color: var(--text-primary);
   border-color: var(--accent-blue);
   box-shadow: var(--shadow-glow);
 }
@@ -83,7 +83,7 @@
   left: 0;
   width: 0;
   height: 3px;
-  background: #6c63ff;
+  background: var(--accent-blue);
   transition: width 0.3s ease;
 }
 .filter-button.active::after,
@@ -139,7 +139,7 @@
   width: 100%;
   aspect-ratio: 4/3;
   overflow: hidden;
-  background: #0b0e17;
+  background: var(--primary-dark);
 }
 .portfolio-thumb img {
   width: 100%;
@@ -251,7 +251,7 @@
   transition: var(--transition);
 }
 .pagination .page:hover {
-  color: #fff;
+  color: var(--text-primary);
   border-color: var(--accent-blue);
   box-shadow: var(--shadow-glow);
 }
@@ -271,7 +271,7 @@
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
-  background: #0b0f1a; /* Fondo oscuro */
+  background: var(--primary-dark);
 }
 .floating-particle {
   position: absolute;

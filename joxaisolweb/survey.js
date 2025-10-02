@@ -1,24 +1,160 @@
-// Variables de control
-let formData = {
-    experience: null,
-    navigation: null,
-    features: [],
-    comments: ''
+// ==========================================
+// SURVEY WIDGET - JavaScript Mejorado
+// Versión: 2.0
+// ==========================================
+
+// Variables de control global
+let widgetShown = false;
+let userIdleTimer;
+
+// Configuración (personalizable)
+const CONFIG = {
+    idleTimeBeforeShow: 5000,        // 5 segundos (cambiar a 30000 para producción)
+    initialDelay: 3000,               // 3 segundos después de cargar
+    autoCloseSuccessDelay: 3000,      // 3 segundos después del éxito
+    notificationDuration: 3000        // 3 segundos de notificación
 };
 
-// Seleccionar emoji con animación
-function selectEmoji(button) {
+// ==========================================
+// CONTROL DEL WIDGET FLOTANTE
+// ==========================================
+
+function showSurveyWidget() {
+    if (!widgetShown) {
+        const widget = document.getElementById('survey-widget');
+        if (widget) {
+            widget.classList.remove('hidden');
+            widget.classList.add('show');
+            widgetShown = true;
+            console.log('✅ Survey widget mostrado');
+        }
+    }
+}
+
+function closeSurveyWidget() {
+    const widget = document.getElementById('survey-widget');
+    if (widget) {
+        widget.classList.remove('show');
+        widget.classList.add('hidden');
+    }
+    widgetShown = false;
+    clearTimeout(userIdleTimer);
+    console.log('❌ Survey widget cerrado');
+}
+
+function openSurveyModal() {
+    const modal = document.getElementById('surveyModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        // Pequeño delay para activar la animación
+        setTimeout(() => {
+            const container = modal.querySelector('.modal-container');
+            if (container) {
+                container.classList.add('animate-in');
+            }
+        }, 10);
+        // Cerrar el widget cuando se abre el modal
+        closeSurveyWidget();
+        console.log('📝 Modal de survey abierto');
+    }
+}
+
+function closeSurveyModal() {
+    const modal = document.getElementById('surveyModal');
+    const container = modal?.querySelector('.modal-container');
+    
+    if (container) {
+        container.classList.remove('animate-in');
+        container.classList.add('animate-out');
+    }
+    
+    setTimeout(() => {
+        if (modal) {
+            modal.style.display = 'none';
+            resetForm();
+        }
+        if (container) {
+            container.classList.remove('animate-out');
+        }
+    }, 300);
+    
+    console.log('❌ Modal de survey cerrado');
+}
+
+function resetForm() {
+    const form = document.getElementById('surveyForm');
+    if (form) form.reset();
+    
+    // Reset de los estados visuales
+    document.querySelectorAll('.emoji-button.selected').forEach(btn => 
+        btn.classList.remove('selected')
+    );
+    document.querySelectorAll('.rating-button.selected').forEach(btn => 
+        btn.classList.remove('selected')
+    );
+    document.querySelectorAll('.checkbox-option.selected').forEach(opt => 
+        opt.classList.remove('selected')
+    );
+    
+    // Mostrar formulario y ocultar mensaje de éxito
+    const formSection = document.getElementById('formSection');
+    const successSection = document.getElementById('successSection');
+    
+    if (formSection) {
+        formSection.style.display = 'block';
+        formSection.style.opacity = '1';
+        formSection.style.transform = 'translateY(0)';
+    }
+    if (successSection) {
+        successSection.style.display = 'none';
+    }
+    
+    console.log('🔄 Formulario reseteado');
+}
+
+// ==========================================
+// GESTIÓN DE IDLE TIME
+// ==========================================
+
+function resetIdleTimer() {
+    if (!widgetShown) {
+        clearTimeout(userIdleTimer);
+        
+        userIdleTimer = setTimeout(() => {
+            showSurveyWidget();
+        }, CONFIG.idleTimeBeforeShow);
+    }
+}
+
+// Eventos para detectar interacción
+function initializeIdleDetection() {
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    
+    events.forEach(event => {
+        document.addEventListener(event, resetIdleTimer, true);
+    });
+    
+    console.log('👂 Detección de inactividad inicializada');
+}
+
+// ==========================================
+// FUNCIONES DEL FORMULARIO
+// ==========================================
+
+function selectEmoji(button, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
     // Remover selección previa
     document.querySelectorAll('.emoji-button').forEach(btn => {
         btn.classList.remove('selected');
     });
     
-    // Agregar selección actual con animación
+    // Agregar selección actual
     button.classList.add('selected');
     const rating = button.getAttribute('data-rating');
-    formData.experience = rating;
-    
-    // Actualizar campo oculto para Netlify
     document.getElementById('experienceInput').value = rating;
     
     // Feedback visual
@@ -26,10 +162,16 @@ function selectEmoji(button) {
     setTimeout(() => {
         button.style.transform = '';
     }, 200);
+    
+    console.log(`⭐ Emoji seleccionado: ${rating}/5`);
 }
 
-// Seleccionar rating con animación
-function selectRating(button, category) {
+function selectRating(button, category, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
     // Remover selección previa del mismo grupo
     button.parentElement.querySelectorAll('.rating-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -38,47 +180,149 @@ function selectRating(button, category) {
     // Agregar selección actual
     button.classList.add('selected');
     const value = button.textContent;
-    formData[category] = value;
     
-    // Actualizar campo oculto para Netlify
-    document.getElementById('navigationInput').value = value;
+    if (category === 'navigation') {
+        document.getElementById('navigationInput').value = value;
+    }
+    
+    console.log(`📊 Rating ${category}: ${value}`);
 }
 
-// Toggle checkbox con animación
 function toggleCheckbox(option) {
     const checkbox = option.querySelector('input[type="checkbox"]');
     checkbox.checked = !checkbox.checked;
     
     if (checkbox.checked) {
         option.classList.add('selected');
-        formData.features.push(checkbox.value);
     } else {
         option.classList.remove('selected');
-        const index = formData.features.indexOf(checkbox.value);
-        if (index > -1) {
-            formData.features.splice(index, 1);
-        }
     }
+    
+    console.log(`☑️ Checkbox "${checkbox.value}": ${checkbox.checked}`);
 }
 
-// Validar formulario
+// ==========================================
+// VALIDACIÓN Y ENVÍO
+// ==========================================
+
 function validateForm() {
-    if (!formData.experience) {
-        showNotification('Por favor, califica tu experiencia general con un emoji', 'warning');
+    const experienceValue = document.getElementById('experienceInput').value;
+    
+    if (!experienceValue) {
+        showNotification(
+            'Por favor, califica tu experiencia general con un emoji', 
+            'warning'
+        );
         return false;
     }
+    
+    console.log('✅ Formulario validado correctamente');
     return true;
 }
 
-// Mostrar notificación
-function showNotification(message, type) {
+function submitFeedback(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    
+    if (!validateForm()) {
+        console.log('❌ Validación fallida');
+        return;
+    }
+    
+    console.log('📤 Enviando feedback...');
+    
+    const form = document.getElementById('surveyForm');
+    const formData = new FormData(form);
+    
+    // Convertir FormData a URLSearchParams para Netlify
+    const encoded = new URLSearchParams(formData).toString();
+    
+    // Mostrar feedback visual inmediato
+    const submitBtn = event?.target;
+    if (submitBtn) {
+        submitBtn.textContent = 'Enviando...';
+        submitBtn.disabled = true;
+    }
+    
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('✅ Feedback enviado exitosamente');
+            showSuccessMessage();
+        } else {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    })
+    .catch(error => {
+        console.error('❌ Error al enviar:', error);
+        showNotification(
+            'Hubo un error al enviar. Por favor intenta de nuevo.', 
+            'error'
+        );
+        
+        // Restaurar botón
+        if (submitBtn) {
+            submitBtn.textContent = 'Enviar Evaluación';
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+function showSuccessMessage() {
+    const formSection = document.getElementById('formSection');
+    const successSection = document.getElementById('successSection');
+    
+    if (!formSection || !successSection) return;
+    
+    // Animación de salida del formulario
+    formSection.style.transition = 'all 0.3s ease';
+    formSection.style.opacity = '0';
+    formSection.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+        formSection.style.display = 'none';
+        successSection.style.display = 'block';
+        
+        // Forzar reflow para la animación
+        void successSection.offsetWidth;
+        
+        successSection.style.opacity = '1';
+        successSection.style.transform = 'translateY(0)';
+    }, 300);
+    
+    // Auto-cerrar después del delay configurado
+    setTimeout(() => {
+        closeSurveyModal();
+    }, CONFIG.autoCloseSuccessDelay);
+    
+    console.log('🎉 Mensaje de éxito mostrado');
+}
+
+// ==========================================
+// NOTIFICACIONES
+// ==========================================
+
+function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.textContent = message;
+    
+    const colors = {
+        info: '#4a90e2',
+        warning: '#ff9800',
+        error: '#f44336',
+        success: '#4caf50'
+    };
+    
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'warning' ? '#ff9800' : type === 'error' ? '#f44336' : '#4a90e2'};
+        background: ${colors[type] || colors.info};
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 8px;
@@ -87,6 +331,7 @@ function showNotification(message, type) {
         animation: slideInRight 0.3s ease;
         font-family: 'Inter', sans-serif;
         font-weight: 500;
+        max-width: 300px;
     `;
     
     document.body.appendChild(notification);
@@ -94,87 +339,69 @@ function showNotification(message, type) {
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease';
         setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, CONFIG.notificationDuration);
+    
+    console.log(`📢 Notificación (${type}): ${message}`);
 }
 
-// Estilos de animación
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from { transform: translateX(400px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOutRight {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(400px); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
+// ==========================================
+// ANIMACIONES CSS DINÁMICAS
+// ==========================================
 
-// Enviar feedback a Netlify
-function submitFeedback() {
-    if (!validateForm()) return;
-    
-    formData.comments = document.getElementById('comments').value;
-    console.log('Datos del formulario:', formData);
-    
-    const form = document.getElementById('surveyForm');
-    const netlifyFormData = new FormData(form);
-    
-    fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(netlifyFormData).toString()
-    })
-    .then(response => {
-        if (response.ok) {
-            const formSection = document.getElementById('formSection');
-            const successSection = document.getElementById('successSection');
-            
-            formSection.style.transition = 'all 0.3s ease';
-            formSection.style.opacity = '0';
-            formSection.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                formSection.style.display = 'none';
-                successSection.classList.add('show');
-                successSection.style.opacity = '1';
-                successSection.style.transform = 'translateY(0)';
-            }, 300);
-            
-            setTimeout(() => {
-                window.close();
-            }, 3000);
-        } else {
-            throw new Error('Error en el envío');
+function injectAnimationStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-    })
-    .catch(error => {
-        console.error('Error al enviar:', error);
-        showNotification('Hubo un error al enviar. Por favor intenta de nuevo.', 'error');
-    });
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
-// Crear partículas de fondo
-function createParticles() {
-    const container = document.getElementById('particles');
-    if (!container) return;
+// ==========================================
+// INICIALIZACIÓN
+// ==========================================
+
+function initializeSurveyWidget() {
+    console.log('🚀 Inicializando Survey Widget...');
     
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-            position: absolute;
-            width: ${Math.random() * 4 + 1}px;
-            height: ${Math.random() * 4 + 1}px;
-            background: rgba(74, 144, 226, ${Math.random() * 0.5 + 0.2});
-            border-radius: 50%;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: float ${Math.random() * 10 + 10}s linear infinite;
-        `;
-        container.appendChild(particle);
-    }
+    // Inyectar estilos de animación
+    injectAnimationStyles();
+    
+    // Inicializar detección de inactividad
+    initializeIdleDetection();
+    
+    // Iniciar el timer después del delay inicial
+    setTimeout(() => {
+        resetIdleTimer();
+        console.log('⏰ Timer de inactividad iniciado');
+    }, CONFIG.initialDelay);
+    
+    console.log('✅ Survey Widget inicializado correctamente');
 }
 
-// Inicializar
-document.addEventListener('DOMContentLoaded', createParticles);
+// ==========================================
+// AUTO-INICIALIZACIÓN
+// ==========================================
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSurveyWidget);
+} else {
+    initializeSurveyWidget();
+}
+
+// Exponer funciones globales para uso en HTML
+window.showSurveyWidget = showSurveyWidget;
+window.closeSurveyWidget = closeSurveyWidget;
+window.openSurveyModal = openSurveyModal;
+window.closeSurveyModal = closeSurveyModal;
+window.selectEmoji = selectEmoji;
+window.selectRating = selectRating;
+window.toggleCheckbox = toggleCheckbox;
+window.submitFeedback = submitFeedback;

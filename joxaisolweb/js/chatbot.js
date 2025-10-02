@@ -1,72 +1,91 @@
-// Este script maneja la interfaz, el flujo de conversación y la inserción del widget de agendamiento. 
-// Añade este código a tu archivo JavaScript, asegurándote de llamarlo después de que el DOM esté cargado.
+// ==========================================
+// CHATBOT.JS - Funcionalidad del asistente
+// ==========================================
 
-//INICIALIZACION Y FUNCIONES DE UTILIDAD
-
-// --- Elementos del DOM ---
+// Elementos del DOM
 const chatContainer = document.getElementById('chatbot-container');
 const chatBody = document.getElementById('chatbot-body');
 const chatToggleButton = document.getElementById('chatbot-toggle-button');
 const closeChatButton = document.getElementById('close-chatbot-btn');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
-let conversationState = 'initial'; // Estado para controlar el flujo
+let conversationState = 'initial';
 
-// --- Funciones de Utilidad ---
+// Inicialización
+document.addEventListener('DOMContentLoaded', function() {
+    initChatbot();
+});
 
-// 1. Alternar Visibilidad del Chat
-chatToggleButton.addEventListener('click', () => {
+function initChatbot() {
+    // Event listeners
+    chatToggleButton.addEventListener('click', toggleChat);
+    closeChatButton.addEventListener('click', closeChat);
+    
+    // Input handling
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !sendBtn.disabled) {
+            handleUserInput();
+        }
+    });
+    
+    sendBtn.addEventListener('click', handleUserInput);
+    
+    // Iniciar conversación
+    setTimeout(() => {
+        startChat();
+    }, 1000);
+}
+
+function toggleChat() {
     chatContainer.classList.toggle('hidden');
-    // Si se abre, reinicia el chat
     if (!chatContainer.classList.contains('hidden')) {
         resetChat();
+        userInput.focus();
     }
-});
-closeChatButton.addEventListener('click', () => {
+}
+
+function closeChat() {
     chatContainer.classList.add('hidden');
-});
+}
 
+function resetChat() {
+    chatBody.innerHTML = '';
+    userInput.disabled = false;
+    sendBtn.disabled = false;
+    conversationState = 'initial';
+}
 
-// 2. Mostrar Mensaje en el Chat
+// Mostrar mensaje en el chat
 function displayMessage(text, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender === 'bot' ? 'bot-message' : 'user-message');
     
-    // Crear un párrafo para el texto (mejora visual)
     const textNode = document.createElement('p');
-    textNode.innerHTML = text; // Usar innerHTML para aceptar negritas o saltos de línea
+    textNode.innerHTML = text;
     messageDiv.appendChild(textNode);
     
     chatBody.appendChild(messageDiv);
-    chatBody.scrollTop = chatBody.scrollHeight; // Scroll al final
+    chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// 3. Mostrar Opciones del Botón
+// Mostrar opciones de botón
 function displayOptions(options) {
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'options-container';
+    
     options.forEach(option => {
         const button = document.createElement('button');
         button.classList.add('option-button');
         button.textContent = option.text;
         button.onclick = () => handleOptionSelection(option.value, option.text);
-        chatBody.appendChild(button);
+        optionsContainer.appendChild(button);
     });
+    
+    chatBody.appendChild(optionsContainer);
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// 4. Reiniciar el Chat
-function resetChat() {
-    chatBody.innerHTML = '';
-    userInput.disabled = true;
-    sendBtn.disabled = true;
-    conversationState = 'initial';
-    setTimeout(() => {
-        startChat();
-    }, 500);
-}
-
-// FLUJO DE CONVERSACION Y LOGICA PRINCIPAL
-
-// 5. Iniciar la Conversación
+// Iniciar conversación
 function startChat() {
     displayMessage("¡Hola! Soy el Asistente de JoxAI Solutions. ¿En qué puedo ayudarte hoy?", 'bot');
     
@@ -77,7 +96,7 @@ function startChat() {
     displayOptions(options);
 }
 
-// 6. Manejar la Selección de Opciones
+// Manejar selección de opciones
 function handleOptionSelection(value, text) {
     displayMessage(text, 'user');
     
@@ -94,58 +113,54 @@ function handleOptionSelection(value, text) {
     }
 }
 
-
-// 7. Flujo de Cita/Agendamiento
+// Flujo de cita/agendamiento
 function handleCitaFlow() {
     displayMessage("¡Excelente! Para agendar una reunión por Google Meet o Zoom, utilizaremos nuestra herramienta de calendario. Elige el mejor momento en el widget de abajo.", 'bot');
     
-    // --------------------------------------------------------
-    // *** CAMBIO CLAVE: Insertar Widget de Calendly ***
-    // --------------------------------------------------------
-    // 1. CÓDIGO HTML DE CALENDLY:
-    //    Debes obtener este código de tu cuenta de Calendly (o la herramienta que uses).
-    //    Asegúrate de cambiar 'TUCALENDLY' por tu nombre de usuario real de Calendly.
+    // Insertar Widget de Calendly
     const calendlyWidget = `
-        <div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent;">
+        <div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent; padding: 0;">
             <div class="calendly-inline-widget" 
                  data-url="https://calendly.com/joxai-solutions/30min" 
-                 style="min-width:320px;height:450px;">
+                 style="min-width:320px;height:450px; border-radius: var(--border-radius); overflow: hidden;">
             </div>
         </div>
     `;
     
-    // 2. Insertar el script de Calendly (si aún no está en el body)
+    // Insertar el script de Calendly si no existe
     if (!document.querySelector('script[src*="calendly.com"]')) {
         const script = document.createElement('script');
         script.type = "text/javascript";
         script.src = "https://assets.calendly.com/assets/external/widget.js";
+        script.async = true;
         document.body.appendChild(script);
     }
 
-    // 3. Añadir el HTML del widget al chat
+    // Añadir el HTML del widget al chat
     chatBody.innerHTML += calendlyWidget;
     chatBody.scrollTop = chatBody.scrollHeight;
-    
-    // --------------------------------------------------------
     
     // Ofrecer opción para volver después
     setTimeout(() => {
         displayOptions([{ text: "Volver al Menú Principal", value: "volver" }]);
-    }, 1000);
+    }, 2000);
 }
 
-
-// 8. Flujo de Tour de Proyectos
+// Flujo de tour de proyectos
 function handleTourFlow() {
     displayMessage("¡Claro! El tour te llevará a una página especial donde podrás explorar nuestros proyectos más recientes y casos de éxito.", 'bot');
     
-    const tourLink = "www.joxai.site/portfolio"; // <-- REEMPLAZA ESTO
+    const tourLink = "./project-tour.html";
     
-    const linkHTML = `<a href="${tourLink}" target="_blank" class="option-button" style="text-align: center; background-color: #28a745;">
-                          Iniciar Tour de Proyectos
-                      </a>`;
+    const linkHTML = `
+        <div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent;">
+            <a href="${tourLink}" target="_blank" class="option-button" style="text-align: center; display: block; text-decoration: none;">
+                <i class="fas fa-rocket"></i> Iniciar Tour de Proyectos
+            </a>
+        </div>
+    `;
     
-    chatBody.innerHTML += `<div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent;">${linkHTML}</div>`;
+    chatBody.innerHTML += linkHTML;
     chatBody.scrollTop = chatBody.scrollHeight;
     
     displayMessage("¡Feliz exploración! Si tienes preguntas, agenda una consulta. 😉", 'bot');
@@ -155,8 +170,17 @@ function handleTourFlow() {
     }, 1000);
 }
 
-
-// --- Llama a la función de inicio al cargar el DOM ---
-document.addEventListener('DOMContentLoaded', () => {
-    startChat();
-});
+// Manejar input del usuario
+function handleUserInput() {
+    const userText = userInput.value.trim();
+    if (userText === '') return;
+    
+    displayMessage(userText, 'user');
+    userInput.value = '';
+    
+    // Respuesta automática simple
+    setTimeout(() => {
+        displayMessage("Gracias por tu mensaje. Para una atención más personalizada, te recomiendo usar las opciones del menú o agendar una consulta.", 'bot');
+        displayOptions([{ text: "Agendar Consulta", value: "cita" }, { text: "Ver Proyectos", value: "tour" }]);
+    }, 1000);
+}

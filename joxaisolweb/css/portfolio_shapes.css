@@ -8,7 +8,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1; /* Cambiado a 1 para estar detrás del contenido */
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -24,16 +24,16 @@
 /* Labels colgantes */
 .geom-label {
   position: relative;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); /* Soporte para Safari */
-  color: #ffffff;
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 0.85rem;
   padding: 8px 14px;
   border-radius: 20px;
   margin-top: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--glass-border);
   white-space: nowrap;
   opacity: 0.9;
   transform-origin: center;
@@ -49,7 +49,7 @@
   transform: translateX(-50%);
   width: 2px;
   height: 12px;
-  background: linear-gradient(to bottom, rgba(74, 144, 226, 0.4), rgba(107, 182, 255, 0.3));
+  background: linear-gradient(to bottom, var(--accent-blue), rgba(107, 182, 255, 0.3));
 }
 
 /* Figuras geométricas */
@@ -67,27 +67,27 @@
 /* Triángulo */
 .shape-triangle {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  background: linear-gradient(135deg, #4a90e2, #6bb6ff); /* Usando colores directos */
+  background: var(--gradient-primary);
   animation-name: float-triangle;
 }
 
 /* Círculo */
 .shape-circle {
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #4a90e2, #6bb6ff);
+  background: radial-gradient(circle at 30% 30%, var(--accent-blue), var(--accent-light-blue));
   animation-name: float-circle;
 }
 
 /* Cuadrado */
 .shape-square {
-  background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+  background: var(--gradient-primary);
   animation-name: float-square;
 }
 
 /* Hexágono */
 .shape-hexagon {
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-  background: linear-gradient(135deg, #4a90e2, #6bb6ff);
+  background: var(--gradient-primary);
   animation-name: float-hexagon;
 }
 
@@ -132,7 +132,7 @@
     opacity: 0.35;
     filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.4));
     transform: scale(1.15);
-    transition: all 0.4s ease;
+    transition: var(--transition);
   }
   
   .geom:hover .geom-label {
@@ -140,7 +140,7 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transform: scale(1.05);
-    transition: all 0.4s ease;
+    transition: var(--transition);
   }
 }
 
@@ -197,7 +197,7 @@
 /* RESPONSIVE: Simplificar en móviles */
 @media (max-width: 900px) {
   .shapes-layer {
-    display: none; /* Ocultar completamente en móviles para mejor rendimiento */
+    display: none;
   }
 }
 
