@@ -2,14 +2,14 @@
    VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-  --primary-dark: #292b34;
+  --primary-dark: #25272f;
   --secondary-dark: #23262c;
   --accent-blue: #b1c9e4;
   --accent-light-blue: #5bd6ff;
   --text-primary: #fcfbff;
   --text-secondary: #b8bcc8;
   --text-muted: #4e67b2;
-  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(47, 42, 42, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --gradient-primary: linear-gradient(135deg, #309ff4, #2d7ef6);
   --gradient-dark: linear-gradient(135deg, #1a1d29, #252837);
@@ -117,6 +117,7 @@ body {
 }
 
 .cta-button {
+  text-decoration: none;
   background: var(--gradient-primary);
   color: white;
   border: none;
@@ -130,6 +131,19 @@ body {
 .cta-button:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-glow);
+}
+.cta-button::after{
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: var(--transition);
+}
+.cta-button:hover::after {
+  width: 100%;
 }
 /* Botón hamburguesa oculto en desktop */
 .nav-toggle {
@@ -703,4 +717,202 @@ body {
 
 
 
+/*DISENOS PARA PARTICULAS FLOTANTES*/
 
+/* ==========================================
+   SISTEMA DE PARTÍCULAS PARA HERO
+========================================== */
+
+/* Contenedor de partículas */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Partículas pequeñas (efecto estrellas) */
+.particle-small {
+  position: absolute;
+  background: radial-gradient(circle, rgba(177, 201, 228, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-small 20s infinite ease-in-out;
+}
+
+/* Partículas medianas */
+.particle-medium {
+  position: absolute;
+  background: radial-gradient(circle, rgba(48, 159, 244, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-medium 25s infinite ease-in-out;
+  filter: blur(2px);
+}
+
+/* Partículas grandes (masivas/orbes) */
+.particle-large {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, 
+      rgba(48, 159, 244, 0.15) 0%, 
+      rgba(45, 126, 246, 0.08) 50%,
+      transparent 100%);
+  border-radius: 50%;
+  animation: float-large 30s infinite ease-in-out;
+  filter: blur(40px);
+}
+
+/* Formas geométricas flotantes */
+.geometric-shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: rotate-float 35s infinite ease-in-out;
+}
+
+.shape-circle {
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--accent-blue);
+  border-radius: 50%;
+}
+
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-bottom: 130px solid var(--accent-blue);
+}
+
+.shape-square {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--accent-light-blue);
+  transform: rotate(45deg);
+}
+
+/* Líneas de conexión animadas */
+.connection-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(177, 201, 228, 0.3) 50%, 
+      transparent 100%);
+  animation: pulse-line 3s infinite ease-in-out;
+}
+
+/* ==========================================
+ ANIMACIONES DE PARTÍCULAS
+========================================== */
+
+@keyframes float-small {
+  0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.6;
+  }
+  25% {
+      transform: translate(30px, -40px) scale(1.2);
+      opacity: 1;
+  }
+  50% {
+      transform: translate(-20px, -80px) scale(0.8);
+      opacity: 0.4;
+  }
+  75% {
+      transform: translate(40px, -60px) scale(1.1);
+      opacity: 0.8;
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.5;
+  }
+  33% {
+      transform: translate(-50px, -100px) scale(1.3);
+      opacity: 0.7;
+  }
+  66% {
+      transform: translate(60px, -50px) scale(0.9);
+      opacity: 0.4;
+  }
+}
+
+@keyframes float-large {
+  0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+  }
+  25% {
+      transform: translate(-80px, -120px) scale(1.2);
+      opacity: 0.5;
+  }
+  50% {
+      transform: translate(100px, -200px) scale(0.8);
+      opacity: 0.2;
+  }
+  75% {
+      transform: translate(-60px, -150px) scale(1.1);
+      opacity: 0.4;
+  }
+}
+
+@keyframes rotate-float {
+  0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.1;
+  }
+  25% {
+      transform: translate(-30px, -50px) rotate(90deg);
+      opacity: 0.15;
+  }
+  50% {
+      transform: translate(40px, -100px) rotate(180deg);
+      opacity: 0.08;
+  }
+  75% {
+      transform: translate(-20px, -75px) rotate(270deg);
+      opacity: 0.12;
+  }
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+      opacity: 0.2;
+      transform: scaleX(1);
+  }
+  50% {
+      opacity: 0.5;
+      transform: scaleX(1.2);
+  }
+}
+
+/* ==========================================
+ RESPONSIVE - PARTÍCULAS
+========================================== */
+
+@media (max-width: 768px) {
+  /* Reducir cantidad de partículas en móviles para mejor performance */
+  .particle-large {
+      filter: blur(30px);
+  }
+  
+  .geometric-shape {
+      opacity: 0.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Respetar preferencias de accesibilidad */
+  .particle-small,
+  .particle-medium,
+  .particle-large,
+  .geometric-shape,
+  .connection-line {
+      animation: none !important;
+  }
+}

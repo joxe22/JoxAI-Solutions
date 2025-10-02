@@ -360,3 +360,88 @@ function closeModal(modal) {
         }
     }, 300);
 }
+
+//FUNCION PARA SISTEMA DE PARTICULAS
+
+        // Función para crear el sistema de partículas
+        function createParticleSystem() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+
+            // Limpiar partículas existentes
+            container.innerHTML = '';
+
+            const particleTypes = [
+                { class: 'particle-small', count: 50, sizeRange: [2, 6] },
+                { class: 'particle-medium', count: 20, sizeRange: [20, 50] },
+                { class: 'particle-large', count: 8, sizeRange: [200, 400] }
+            ];
+
+            // Crear partículas de diferentes tamaños
+            particleTypes.forEach(type => {
+                for (let i = 0; i < type.count; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = type.class;
+                    
+                    const size = Math.random() * (type.sizeRange[1] - type.sizeRange[0]) + type.sizeRange[0];
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    const duration = Math.random() * 20 + 15;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    container.appendChild(particle);
+                }
+            });
+
+            // Crear formas geométricas
+            const shapes = ['circle', 'triangle', 'square'];
+            shapes.forEach((shape, index) => {
+                const geomShape = document.createElement('div');
+                geomShape.className = `geometric-shape shape-${shape}`;
+                
+                const positions = [
+                    { top: '15%', left: '10%' },
+                    { top: '70%', left: '85%' },
+                    { top: '40%', left: '75%' }
+                ];
+                
+                geomShape.style.top = positions[index].top;
+                geomShape.style.left = positions[index].left;
+                geomShape.style.animationDelay = `${index * 2}s`;
+                
+                container.appendChild(geomShape);
+            });
+
+            // Crear líneas de conexión
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'connection-line';
+                
+                line.style.width = `${Math.random() * 200 + 100}px`;
+                line.style.left = `${Math.random() * 80}%`;
+                line.style.top = `${Math.random() * 80 + 10}%`;
+                line.style.transform = `rotate(${Math.random() * 180}deg)`;
+                line.style.animationDelay = `${Math.random() * 2}s`;
+                
+                container.appendChild(line);
+            }
+        }
+
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createParticleSystem);
+        } else {
+            createParticleSystem();
+        }
+
+        // Recrear partículas al cambiar el tamaño de la ventana
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(createParticleSystem, 250);
+        });
