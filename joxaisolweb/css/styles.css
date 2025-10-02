@@ -2,19 +2,19 @@
    VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-  --primary-dark: #1a1d29;
-  --secondary-dark: #252837;
+  --primary-dark: #292b34;
+  --secondary-dark: #23262c;
   --accent-blue: #b1c9e4;
-  --accent-light-blue: #48c8f3;
-  --text-primary: #dee3ff;
+  --accent-light-blue: #5bd6ff;
+  --text-primary: #fcfbff;
   --text-secondary: #b8bcc8;
-  --text-muted: #8892b0;
+  --text-muted: #4e67b2;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --gradient-primary: linear-gradient(135deg, #6c85f1, #3d7dbc);
+  --gradient-primary: linear-gradient(135deg, #309ff4, #2d7ef6);
   --gradient-dark: linear-gradient(135deg, #1a1d29, #252837);
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 20px rgba(74, 144, 226, 0.3);
+  --shadow-glow: 0 0 20px rgba(68, 106, 150, 0.3);
   --border-radius: 12px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
