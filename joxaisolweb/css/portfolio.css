@@ -4,10 +4,19 @@
   --secondary-dark: #23262c;
   --accent-blue: #b1c9e4;
   --accent-light-blue: #5bd6ff;
-  --text-primary: #fcfbff;
+  --text-primary: #b3c7ef;
   --text-secondary: #b8bcc8;
-  --gradient-primary: linear-gradient(135deg, #309ff4, #2d7ef6);
+  --text-muted: #476ccb;
+  --glass-bg: rgba(47, 42, 42, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --gradient-primary: linear-gradient(135deg, #3d4b6c, #2d7ef6);
+  --gradient-dark: linear-gradient(135deg, #1a1d292f, #40466100);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(68, 106, 150, 0.114);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -27,6 +36,8 @@
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   text-align: center;
   margin-bottom: 0.75rem;
+  background: #1f1f4252;
+  
 }
 .page-hero .hero-subtitle {
   text-align: center;
@@ -112,6 +123,27 @@
   height: 3px;
   background: var(--accent-blue);
   transition: width 0.3s ease;
+}
+.filter-button.active::after,
+.filter-button:hover::after {
+  width: 100%;
+}
+.filter-button a{
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+.filter-button a:hover{
+  color: var(--text-primary);
+}
+.filter-button.active a{
+  color: #fff;
+  background: var(--gradient-primary);
+  border-color: transparent;
+}
+.filter-button.active a:hover{
+  color: #fff;
+  background: var(--gradient-primary);
+  border-color: transparent;
 }
 .filter-button.active::after,
 .filter-button:hover::after {

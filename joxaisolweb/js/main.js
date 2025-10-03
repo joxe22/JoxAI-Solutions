@@ -445,3 +445,361 @@ function closeModal(modal) {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(createParticleSystem, 250);
         });
+
+        // ==========================================
+// ABOUT PAGE SPECIFIC SCRIPTS
+// ==========================================
+
+function initAboutPage() {
+    // Check if we're on the about page
+    if (!document.body.classList.contains('about-page')) return;
+    
+    initAboutThreeScene();
+    initAboutParticles();
+}
+
+// Three.js Scene for About Page
+function initAboutThreeScene() {
+    const sceneElement = document.getElementById('three-scene');
+    if (!sceneElement) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, sceneElement.offsetWidth / sceneElement.offsetHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(sceneElement.offsetWidth, sceneElement.offsetHeight);
+    renderer.setClearColor(0x000000, 0);
+    sceneElement.appendChild(renderer.domElement);
+
+    // Create geometries for about page
+    const geometries = [
+        new THREE.OctahedronGeometry(0.8, 0),
+        new THREE.DodecahedronGeometry(0.7, 0),
+        new THREE.IcosahedronGeometry(0.9, 0),
+        new THREE.TetrahedronGeometry(0.6, 0)
+    ];
+
+    // Create materials with different colors
+    const materials = [
+        new THREE.MeshBasicMaterial({ color: 0x6c63ff, wireframe: true }),
+        new THREE.MeshBasicMaterial({ color: 0x00b4d8, wireframe: true }),
+        new THREE.MeshBasicMaterial({ color: 0x1a1a2e, wireframe: true }),
+        new THREE.MeshBasicMaterial({ color: 0x4a90e2, wireframe: true })
+    ];
+
+    // Create objects
+    const objects = [];
+    for (let i = 0; i < 12; i++) {
+        const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+        const material = materials[Math.floor(Math.random() * materials.length)];
+        const object = new THREE.Mesh(geometry, material);
+        
+        // Random position
+        object.position.x = (Math.random() - 0.5) * 8;
+        object.position.y = (Math.random() - 0.5) * 8;
+        object.position.z = (Math.random() - 0.5) * 8;
+        
+        // Random rotation
+        object.rotation.x = Math.random() * Math.PI;
+        object.rotation.y = Math.random() * Math.PI;
+        
+        // Rotation speed
+        object.userData = {
+            rotationSpeedX: (Math.random() - 0.5) * 0.01,
+            rotationSpeedY: (Math.random() - 0.5) * 0.01,
+            rotationSpeedZ: (Math.random() - 0.5) * 0.01
+        };
+        
+        scene.add(object);
+        objects.push(object);
+    }
+
+    camera.position.z = 5;
+
+    // Animation
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        objects.forEach(object => {
+            object.rotation.x += object.userData.rotationSpeedX;
+            object.rotation.y += object.userData.rotationSpeedY;
+            object.rotation.z += object.userData.rotationSpeedZ;
+        });
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    // Handle resize
+    function handleResize() {
+        const container = sceneElement;
+        camera.aspect = container.offsetWidth / container.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+    }
+
+    window.addEventListener('resize', handleResize);
+}
+
+// Particles for About Page
+function initAboutParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+
+    const particleCount = 40;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle-small');
+        
+        // Random size
+        const size = Math.random() * 4 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random animation delay and duration
+        const delay = Math.random() * 20;
+        const duration = 15 + Math.random() * 15;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        
+        particlesContainer.appendChild(particle);
+    }
+
+    // Add some geometric shapes
+    const shapes = ['circle', 'triangle', 'square'];
+    for (let i = 0; i < 3; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('geometric-shape', `shape-${shapes[i]}`);
+        
+        // Random position
+        shape.style.left = `${Math.random() * 80 + 10}%`;
+        shape.style.top = `${Math.random() * 80 + 10}%`;
+        
+        // Random animation delay
+        shape.style.animationDelay = `${Math.random() * 10}s`;
+        
+        particlesContainer.appendChild(shape);
+    }
+}
+
+// Initialize about page when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initAboutPage();
+    
+    // Add scroll animations for about page elements
+    if (document.body.classList.contains('about-page')) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe value items and team members for fade-in effect
+        document.querySelectorAll('.value-item, .team-member').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+    }
+});
+
+// Floating animation for cards
+const floatAnimation = `
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(2deg); }
+    50% { transform: translateY(-5px) rotate(-1deg); }
+    75% { transform: translateY(-8px) rotate(1deg); }
+}
+
+.card-float {
+    animation: float 6s ease-in-out infinite;
+}
+`;
+
+// Add floating animation to style
+if (!document.querySelector('#float-animation')) {
+    const style = document.createElement('style');
+    style.id = 'float-animation';
+    style.textContent = floatAnimation;
+    document.head.appendChild(style);
+}
+// ==========================================
+// PORTFOLIO FUNCTIONALITY
+// ==========================================
+
+function initPortfolioPage() {
+    // Check if we're on the portfolio page
+    if (!document.body.classList.contains('portfolio-page')) return;
+    
+    initPortfolioFilters();
+    initPortfolioParticles();
+    initPortfolioAnimations();
+}
+
+// Portfolio Filtering
+function initPortfolioFilters() {
+    const buttons = document.querySelectorAll('.filter-button');
+    const items = document.querySelectorAll('.portfolio-item');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            
+            // Update active buttons
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Filter items with animation
+            items.forEach(item => {
+                const category = item.dataset.category;
+                const shouldShow = filter === 'all' || category === filter;
+                
+                if (shouldShow) {
+                    // Show with animation
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.classList.add('animate-in');
+                    }, 50);
+                } else {
+                    // Hide removing animation
+                    item.classList.remove('animate-in');
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+}
+
+// Portfolio Particles System
+function initPortfolioParticles() {
+    const container = document.getElementById('portfolioParticles');
+    if (!container) return;
+
+    // Clear container
+    container.innerHTML = '';
+
+    // Particle configuration
+    const config = {
+        small: { count: 40, sizeRange: [2, 5] },
+        medium: { count: 15, sizeRange: [25, 55] },
+        large: { count: 6, sizeRange: [220, 450] }
+    };
+
+    // Create small particles
+    for (let i = 0; i < config.small.count; i++) {
+        createParticle('pp-small', config.small.sizeRange, 18, 6, container);
+    }
+
+    // Create medium particles
+    for (let i = 0; i < config.medium.count; i++) {
+        createParticle('pp-medium', config.medium.sizeRange, 22, 5, container);
+    }
+
+    // Create large orbs
+    for (let i = 0; i < config.large.count; i++) {
+        createParticle('pp-large', config.large.sizeRange, 28, 4, container);
+    }
+
+    // Create geometric shapes
+    const geoShapes = [
+        { class: 'circle', pos: { top: '20%', left: '12%' } },
+        { class: 'triangle', pos: { top: '65%', left: '82%' } },
+        { class: 'square', pos: { top: '45%', left: '8%' } },
+        { class: 'hexagon', pos: { top: '30%', left: '88%' } }
+    ];
+
+    geoShapes.forEach((shape, index) => {
+        const geo = document.createElement('div');
+        geo.className = `pp-geo pp-geo-${shape.class}`;
+        geo.style.top = shape.pos.top;
+        geo.style.left = shape.pos.left;
+        geo.style.animationDelay = `${index * 2.5}s`;
+        container.appendChild(geo);
+    });
+
+    // Create connection lines
+    for (let i = 0; i < 6; i++) {
+        const line = document.createElement('div');
+        line.className = 'pp-line';
+        
+        line.style.width = `${Math.random() * 220 + 120}px`;
+        line.style.left = `${Math.random() * 75}%`;
+        line.style.top = `${Math.random() * 85 + 8}%`;
+        line.style.transform = `rotate(${Math.random() * 180}deg)`;
+        line.style.animationDelay = `${Math.random() * 3}s`;
+        
+        container.appendChild(line);
+    }
+}
+
+function createParticle(className, sizeRange, baseDuration, maxDelay, container) {
+    const particle = document.createElement('div');
+    particle.className = className;
+    
+    const size = Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0];
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDuration = `${Math.random() * 8 + baseDuration}s`;
+    particle.style.animationDelay = `${Math.random() * maxDelay}s`;
+    
+    container.appendChild(particle);
+}
+
+// Portfolio Animations
+function initPortfolioAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe portfolio items for animation
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+
+// Recreate particles on resize (with debounce)
+let portfolioResizeTimer;
+function handlePortfolioResize() {
+    clearTimeout(portfolioResizeTimer);
+    portfolioResizeTimer = setTimeout(initPortfolioParticles, 300);
+}
+
+// Initialize portfolio page when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initPortfolioPage();
+    
+    // Add resize listener for portfolio page
+    if (document.body.classList.contains('portfolio-page')) {
+        window.addEventListener('resize', handlePortfolioResize);
+    }
+});
