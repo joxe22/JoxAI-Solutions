@@ -57,12 +57,32 @@
     <header class="main-header">
         
         <div class="geometric-background">
-            <div class="shape cube"></div>
-            <div class="shape line-connect"></div>
-            <div class="shape triangle"></div>
-            <div class="shape circle"></div>
-    
+            <!-- Cubos y cuadrados animados -->
+            <div class="shape cube shape-1"></div>
+            <div class="shape cube shape-2"></div>
+            <div class="shape square shape-3"></div>
+            <div class="shape square shape-4"></div>
             
+            <!-- Círculos flotantes -->
+            <div class="shape circle circle-1"></div>
+            <div class="shape circle circle-2"></div>
+            <div class="shape circle circle-3"></div>
+            
+            <!-- Triángulos dinámicos -->
+            <div class="shape triangle triangle-1"></div>
+            <div class="shape triangle triangle-2"></div>
+            <div class="shape triangle triangle-3"></div>
+            
+            <!-- Hexágonos -->
+            <div class="shape hexagon hexagon-1"></div>
+            <div class="shape hexagon hexagon-2"></div>
+            
+            <!-- Líneas conectoras -->
+            <div class="shape line-connect line-1"></div>
+            <div class="shape line-connect line-2"></div>
+            <div class="shape line-connect line-3"></div>
+            
+            <!-- Partículas brillantes (dots) -->
             <div class="shape dot" style="top: 85%; left: 10%; animation-delay: 1s;"></div>
             <div class="shape dot" style="top: 5%; left: 80%; animation-delay: 5s; animation-duration: 35s;"></div>
             <div class="shape dot" style="top: 50%; left: 5%; animation-delay: 12s; animation-duration: 20s;"></div>
@@ -73,7 +93,15 @@
             <div class="shape dot" style="top: 10%; right: 15%; animation-delay: 14s; animation-duration: 22s;"></div>
             <div class="shape dot" style="bottom: 25%; left: 40%; animation-delay: 7s;"></div>
             <div class="shape dot" style="top: 60%; left: 90%; animation-delay: 25s; animation-duration: 50s;"></div>
+            <div class="shape dot" style="top: 40%; left: 70%; animation-delay: 10s;"></div>
+            <div class="shape dot" style="bottom: 35%; right: 15%; animation-delay: 15s;"></div>
+            <div class="shape dot" style="top: 20%; left: 45%; animation-delay: 6s;"></div>
+            <div class="shape dot" style="bottom: 50%; left: 25%; animation-delay: 22s;"></div>
+            <div class="shape dot" style="top: 65%; right: 30%; animation-delay: 11s;"></div>
             
+            <!-- Anillos pulsantes -->
+            <div class="shape ring ring-1"></div>
+            <div class="shape ring ring-2"></div>
         </div>
         
         <h1 class="page-title">Tour De Proyectos</h1>
@@ -121,25 +149,6 @@
     </div>
 
     <script defer src="./project-tour.js"></script>
-    
-    <!--SCRIPT PARA EL NUEVO NAVBAR-->
-    <script>
-        const toggle = document.querySelector('.nav-toggle');
-        const menu = document.getElementById('nav-menu');
-      
-        toggle.addEventListener('click', () => {
-          const open = toggle.getAttribute('aria-expanded') === 'true';
-          toggle.setAttribute('aria-expanded', String(!open));
-          menu.classList.toggle('open', !open);
-        });
-      
-        // Cierra el menú al navegar
-        menu.addEventListener('click', (e) => {
-          if (e.target.closest('a')) {
-            toggle.setAttribute('aria-expanded', 'false');
-            menu.classList.remove('open');
-          }
-        });
-      </script>
+    <script defer src="../js/main.js"></script>
 </body>
 </html>
