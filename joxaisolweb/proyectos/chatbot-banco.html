@@ -9,19 +9,25 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Chatbot Bancario con IA | JoxAI Solutions">
   <meta property="og:description" content="Reducción del tiempo de respuesta en 62% y NPS +18.">
-  <meta property="og:image" content="../assets/images/portfolio/chatbot-banco-hero.jpg">
+  <meta property="og:image" content="https://www.joxai.site/assets/images/portfolio/bank-social-media.webp">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.joxai.site/proyectos/chatbot-banco.html">
   <link rel="canonical" href="https://www.joxai.site/proyectos/chatbot-banco.html">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/logos/new_logo.png">
+
   <!-- Estilos (base, animaciones, luego portfolio último) -->
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/design-improvements.css">
 
   <link rel="stylesheet" href="./project-chatbot.css">
  
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
 
@@ -32,11 +38,16 @@
         <img src="../assets/images/logo.png" alt="JoxAI Solutions">
         <span>JoxAI Solutions</span>
       </div>
-      <ul class="nav-menu">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="../index.html#inicio">Inicio</a></li>
         <li><a href="../index.html#servicios">Servicios</a></li>
         <li><a href="../about.html">Nosotros</a></li>
-        <li><a href="../portafolio.html" aria-current="page">Portafolio</a></li>
+        <li><a href="../portfolio.html" aria-current="page">Portafolio</a></li>
         <li><a href="../index.html#contacto">Contacto</a></li>
       </ul>
       <a class="cta-button" href="../index.html#contacto">Consulta Gratuita</a>
@@ -49,7 +60,7 @@
       <nav class="breadcrumb" aria-label="breadcrumb">
         <a href="../index.html">Inicio</a>
         <span aria-hidden="true">/</span>
-        <a href="../portafolio.html">Portafolio</a>
+        <a href="../portfolio.html">Portafolio</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Chatbot Bancario con IA</span>
       </nav>
@@ -361,5 +372,25 @@
   data-tips="Tipos de cuenta|Requisitos tarjeta|Horarios y oficinas"
   defer
 ></script>
+
+  <script>
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+    
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+    });
+  }
+</script>
 </body>
 </html>

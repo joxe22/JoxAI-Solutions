@@ -9,18 +9,23 @@
   <!-- Open Graph -->
   <meta property="og:title" content="RPA de Facturas | JoxAI Solutions">
   <meta property="og:description" content="OCR + flujos end‑to‑end con 97% de precisión y 4× velocidad.">
-  <meta property="og:image" content="../assets/images/portfolio/rpa-facturas.jpg">
+  <meta property="og:image" content="https://www.joxai.site/assets/images/portfolio/rpa-social.webp">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://tudominio.com/proyectos/rpa-facturas.html">
   <link rel="canonical" href="https://joxai.site/proyectos/rpa-facturas.html">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/logos/new_logo.png">
+
   <!-- Estilos (base, animaciones, portfolio último) -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/design-improvements.css">
   <link rel="stylesheet" href="../css/portfolio.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -30,7 +35,12 @@
         <img src="../assets/images/logo.png" alt="JoxAI Solutions">
         <span>JoxAI Solutions</span>
       </div>
-      <ul class="nav-menu">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="../index.html#inicio">Inicio</a></li>
         <li><a href="../index.html#servicios">Servicios</a></li>
         <li><a href="../index.html#nosotros">Nosotros</a></li>
@@ -228,5 +238,25 @@
       document.addEventListener('keydown', function esc(e2){ if (e2.key === 'Escape'){ overlay.classList.remove('show'); document.removeEventListener('keydown', esc); }});
     });
   </script>
+
+  <script>
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+    
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+    });
+  }
+</script>
 </body>
 </html>

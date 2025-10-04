@@ -29,12 +29,21 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "bash"
+mode = "sequential"
+author = 46603711
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git add ."
+
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 34871
+localPort = 33133
 externalPort = 3001
 
 [deployment]

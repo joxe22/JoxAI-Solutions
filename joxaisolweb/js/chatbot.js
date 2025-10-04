@@ -150,7 +150,18 @@ function handleCitaFlow() {
 function handleTourFlow() {
     displayMessage("¡Claro! El tour te llevará a una página especial donde podrás explorar nuestros proyectos más recientes y casos de éxito.", 'bot');
     
-    const tourLink = "./project-tour.html";
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/').filter(part => part);
+    const lastPart = pathParts[pathParts.length - 1] || '';
+    const depth = pathParts.length - (lastPart.includes('.html') ? 1 : 0);
+    
+    let tourLink;
+    if (depth === 0) {
+        tourLink = './project-tour/project-tour.html';
+    } else {
+        const upLevels = '../'.repeat(depth);
+        tourLink = upLevels + 'project-tour/project-tour.html';
+    }
     
     const linkHTML = `
         <div class="message bot-message" style="max-width: 100%; border-left: none; background: transparent;">

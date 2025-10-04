@@ -3,11 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour de Proyectos - Tu Empresa</title>
+    <meta property="og:title" content="Tour de Proyectos - JoxAI Solutions">
+    <meta property="og:image" content="https://www.joxai.site/assets/logos/new_logo.png">
+    <meta property="og:description" content="Explora nuestros proyectos de IA, automatización y desarrollo web. Casos de éxito y soluciones innovadoras.">
+    <meta property="og:url" content="https://www.joxai.site/project-tour/">
+    <meta property="og:type" content="website">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="JoxAI Solutions - Tour de Proyectos">
+    <title>Tour de Proyectos - JoxAI Solutions</title>
+    <meta name="description" content="Explora nuestros proyectos de IA, automatización y desarrollo web. Casos de éxito y soluciones innovadoras.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../css/styles.css" as="style">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/logos/new_logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/design-improvements.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="./project-tour.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+      
+          <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+          </button>
+      
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../index.html#servicios">Servicios</a></li>
+            <li><a href="../about.html">Nosotros</a></li>
+            <li><a href="../portfolio.html" target="_self">Portafolio</a></li>
+            <li><a href="../index.html#contacto">Contacto</a></li>
+          </ul>
+      
+          <a class="cta-button" href="../index.html#contacto">Consulta Gratuita</a>
+        </div>
+      </nav>
 
     <header class="main-header">
         
@@ -30,15 +75,6 @@
             <div class="shape dot" style="top: 60%; left: 90%; animation-delay: 25s; animation-duration: 50s;"></div>
             
         </div>
-
-        <nav class="navbar">
-            <div class="nav-links-container">
-                <a href="../index.html" class="nav-link">Inicio</a>
-                <a href="../portfolio.html" class="nav-link">Portafolio</a>
-                </div>
-            
-            <a href="../index.html#contacto" class="btn-demo">Probar Demo</a>
-        </nav>
         
         <h1 class="page-title">Tour De Proyectos</h1>
     </header>
@@ -85,5 +121,25 @@
     </div>
 
     <script defer src="./project-tour.js"></script>
+    
+    <!--SCRIPT PARA EL NUEVO NAVBAR-->
+    <script>
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.getElementById('nav-menu');
+      
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('open', !open);
+        });
+      
+        // Cierra el menú al navegar
+        menu.addEventListener('click', (e) => {
+          if (e.target.closest('a')) {
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.classList.remove('open');
+          }
+        });
+      </script>
 </body>
 </html>
