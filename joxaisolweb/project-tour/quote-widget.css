@@ -1,0 +1,285 @@
+/* ========== WIDGET DE COTIZACIONES ========== */
+
+/* Icono Flotante */
+.quote-float-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6);
+    z-index: 999;
+    transition: all 0.3s ease;
+    animation: floatPulse 3s ease-in-out infinite;
+}
+
+.quote-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(102, 126, 234, 0.8);
+}
+
+.quote-float-btn i {
+    font-size: 28px;
+    color: white;
+}
+
+@keyframes floatPulse {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6);
+    }
+    50% {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.8);
+    }
+}
+
+/* Widget de Cotización */
+.quote-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 450px;
+    max-height: 80vh;
+    background: #1a1f3a;
+    border-radius: 15px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideInUp 0.3s ease-out;
+}
+
+.quote-widget.active {
+    display: flex;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header del Widget */
+.quote-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.quote-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.close-quote-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.close-quote-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* Formulario */
+#quote-form {
+    padding: 25px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section label {
+    display: block;
+    color: #c8d5f0;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="tel"],
+.form-section select,
+.form-section textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(200, 213, 240, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95em;
+    transition: all 0.3s;
+}
+
+.form-section input:focus,
+.form-section select:focus,
+.form-section textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.form-section textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Radio y Checkbox Groups */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.radio-label,
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    color: #c8d5f0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.radio-label:hover,
+.checkbox-label:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(102, 126, 234, 0.15);
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.info-box p {
+    margin: 0 0 10px 0;
+    color: #c8d5f0;
+    font-weight: 600;
+}
+
+.info-box ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #c8d5f0;
+}
+
+.info-box li {
+    margin: 5px 0;
+}
+
+/* Botón de Envío */
+.submit-quote-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.submit-quote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Mensaje de Éxito */
+.quote-success {
+    padding: 40px;
+    text-align: center;
+    color: white;
+}
+
+.quote-success i {
+    font-size: 60px;
+    color: #4ade80;
+    margin-bottom: 20px;
+}
+
+.quote-success h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    color: #4ade80;
+}
+
+.quote-success p {
+    margin: 0;
+    color: #c8d5f0;
+    font-size: 1.05em;
+}
+
+/* Clase Hidden */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quote-widget {
+        width: 90%;
+        right: 5%;
+        bottom: 20px;
+        max-height: 85vh;
+    }
+
+    .quote-float-btn {
+        bottom: 80px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .quote-float-btn i {
+        font-size: 24px;
+    }
+}

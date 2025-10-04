@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="../css/design-improvements.css">
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="./project-tour.css">
+    <link rel="stylesheet" href="./quote-widget.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -146,7 +147,165 @@
         </div>
     </div>
 
+    <!-- Icono Flotante de Cotizaciones -->
+    <div id="quote-float-icon" class="quote-float-btn" title="Solicitar Cotización">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <!-- Formulario de Cotización -->
+    <div id="quote-widget" class="quote-widget">
+        <div class="quote-header">
+            <h3>Solicitar Cotización</h3>
+            <button id="close-quote-btn" class="close-quote-btn">&times;</button>
+        </div>
+        
+        <form name="cotizaciones" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="quote-form">
+            <input type="hidden" name="form-name" value="cotizaciones">
+            <p style="display:none;">
+                <label>No llenar este campo: <input name="bot-field"></label>
+            </p>
+
+            <!-- Información del Cliente -->
+            <div class="form-section">
+                <label for="client-name">Nombre Completo *</label>
+                <input type="text" id="client-name" name="nombre" required>
+
+                <label for="client-email">Correo Electrónico *</label>
+                <input type="email" id="client-email" name="email" required>
+            </div>
+
+            <!-- Selección de Proyecto Disponible -->
+            <div class="form-section">
+                <label for="project-select">¿Te interesa algún proyecto disponible?</label>
+                <select id="project-select" name="proyecto_disponible">
+                    <option value="">-- Ninguno / Proyecto Nuevo --</option>
+                    <option value="Z-BankBot + IA">Z-BankBot + IA</option>
+                    <option value="Plataforma B2B a Escala">Plataforma B2B a Escala</option>
+                </select>
+            </div>
+
+            <!-- Opciones de Proyecto Disponible (condicional) -->
+            <div id="project-options" class="form-section hidden">
+                <label>¿Deseas modificar el proyecto demo?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="modificar_demo" value="tal_cual"> Lo quiero tal cual
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="modificar_demo" value="con_cambios"> Deseo hacer cambios
+                    </label>
+                </div>
+                <div id="changes-input" class="hidden">
+                    <label for="changes-description">Describe los cambios deseados:</label>
+                    <textarea id="changes-description" name="cambios_deseados" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Presupuesto -->
+            <div class="form-section">
+                <label for="budget">Presupuesto Estimado (USD) *</label>
+                <input type="text" id="budget" name="presupuesto" placeholder="Ej: $5000 - $10000" required>
+            </div>
+
+            <!-- Preferencia de Comunicación -->
+            <div class="form-section">
+                <label for="contact-preference">¿Cómo prefieres que te contactemos? *</label>
+                <select id="contact-preference" name="contacto_preferencia" required>
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="correo">Correo Electrónico</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="sms">SMS</option>
+                </select>
+            </div>
+
+            <!-- WhatsApp/SMS (condicional) -->
+            <div id="phone-section" class="form-section hidden">
+                <label for="phone-number">Número de Teléfono *</label>
+                <input type="tel" id="phone-number" name="telefono" placeholder="+1 234 567 8900">
+            </div>
+
+            <!-- Tipo de Cotización -->
+            <div class="form-section">
+                <label for="quote-type">Tipo de Cotización *</label>
+                <select id="quote-type" name="tipo_cotizacion" required>
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="general">General (Full-Pack)</option>
+                    <option value="customizada">Customizada</option>
+                    <option value="normal">Normal (Un servicio específico)</option>
+                </select>
+            </div>
+
+            <!-- Descripción Full-Pack (General) -->
+            <div id="general-description" class="form-section hidden info-box">
+                <p><strong>Full-Pack incluye:</strong></p>
+                <ul>
+                    <li>✓ Responsive Design</li>
+                    <li>✓ IA Integrada</li>
+                    <li>✓ Una Automatización personalizada</li>
+                </ul>
+            </div>
+
+            <!-- Opciones Customizadas -->
+            <div id="custom-options" class="form-section hidden">
+                <label>Selecciona los servicios que deseas:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="responsive_design"> Responsive Design
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="ia_personalizada"> IA Personalizada
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="automatizacion"> Automatización
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="desarrollo_web"> Desarrollo Web
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="seo_marketing"> SEO & Marketing
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="servicios_custom[]" value="base_datos"> Base de Datos
+                    </label>
+                </div>
+            </div>
+
+            <!-- Servicio Normal (Específico) -->
+            <div id="normal-service" class="form-section hidden">
+                <label for="service-type">Selecciona el servicio *</label>
+                <select id="service-type" name="servicio_especifico">
+                    <option value="">-- Selecciona --</option>
+                    <option value="ia">Servicios de IA</option>
+                    <option value="web">Desarrollo Web</option>
+                    <option value="automatizacion">Automatización</option>
+                </select>
+                
+                <div id="service-details" class="hidden">
+                    <label for="service-specification">Especifica el tipo de servicio:</label>
+                    <textarea id="service-specification" name="especificacion_servicio" rows="3" placeholder="Describe el servicio que necesitas..."></textarea>
+                </div>
+            </div>
+
+            <!-- Información Adicional -->
+            <div class="form-section">
+                <label for="additional-info">Información Adicional (Opcional)</label>
+                <textarea id="additional-info" name="informacion_adicional" rows="4" placeholder="Cuéntanos más sobre tu proyecto..."></textarea>
+            </div>
+
+            <!-- Botón de Envío -->
+            <button type="submit" class="submit-quote-btn">Enviar Cotización</button>
+        </form>
+
+        <!-- Mensaje de Confirmación -->
+        <div id="quote-success" class="quote-success hidden">
+            <i class="fas fa-check-circle"></i>
+            <h3>¡Cotización Enviada!</h3>
+            <p>Gracias por tu interés. Te contactaremos pronto.</p>
+        </div>
+    </div>
+
     <script defer src="./project-tour.js"></script>
     <script defer src="../js/main.js"></script>
+    <script defer src="./quote-widget.js"></script>
 </body>
 </html>
