@@ -134,6 +134,44 @@ The server sends no-cache headers to prevent browser caching issues during devel
   - Responsive design for mobile/desktop
   - Files: quote-widget.css, quote-widget.js
 
+  **Complete Mobile & Tablet Responsive Optimization:**
+  - **Horizontal overflow fixes:**
+    * html/body overflow-x: hidden on tablets (≤1024px) and mobile (≤768px)
+    * Universal max-width: 100% on all elements
+    * max-width: 100vw on containers and backgrounds
+  
+  - **Breakpoint coverage:**
+    * Tablets (≤1024px): Grid adjustments, widget positioning, overflow prevention
+    * Mobile (≤768px): Touch-friendly buttons (44px min-height), single-column layouts
+    * Small mobile (≤480px): Further text size reduction, simplified layouts
+    * Landscape (≤500px height): Reduced vertical spacing, optimized modals
+  
+  - **Project Tour page responsive:**
+    * Geometric shapes scaled down on mobile (35-50px)
+    * Complex shapes hidden on very small screens
+    * Modal and cards 100% width on mobile
+    * Navbar simplified for mobile
+  
+  - **Widget optimizations:**
+    * Quote widget: 95% width on mobile, 90vh max-height
+    * Chatbot: Fullscreen when open on mobile
+    * Survey: Adjusted positioning to avoid overlap
+    * All widgets positioned correctly on tablets
+  
+  - **Touch-friendly improvements:**
+    * 44px minimum touch targets (iOS guidelines)
+    * 16px font-size on inputs (prevents iOS zoom)
+    * Improved spacing between interactive elements
+  
+  - **Page-specific fixes:**
+    * Portfolio: Responsive filters, 1-column grid on mobile
+    * About: Team grid single column, adjusted padding
+    * Project pages: Responsive hero, meta in column layout, results grid optimized
+  
+  - **Media elements:**
+    * All images, videos, iframes: max-width: 100%, auto height
+    * Prevent any element from causing horizontal scroll
+
 ## User Preferences
 None specified yet.
 
