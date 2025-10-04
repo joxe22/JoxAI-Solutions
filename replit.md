@@ -118,6 +118,22 @@ The server sends no-cache headers to prevent browser caching issues during devel
   - Optimized navbar alignment and button positioning
   - All animations work in harmony to create an energetic, modern aesthetic
 
+  **Quote Widget System (Sistema de Cotizaciones):**
+  - Removed "Consulta Gratuita" button from navbar
+  - Created floating quote icon (calculator icon with purple gradient)
+  - Implemented comprehensive quote request form connected to Netlify Forms
+  - Smart conditional logic:
+    * Project selection shows modification options
+    * Contact preference (email/WhatsApp/SMS) shows phone field when needed
+    * Quote type (General/Customizada/Normal) shows relevant options
+    * General: displays Full-Pack info (Responsive + IA + Automation)
+    * Customizada: shows checkbox selection of services
+    * Normal: shows specific service selection with description field
+  - Form validation and automatic submission handling
+  - Success message with auto-close functionality
+  - Responsive design for mobile/desktop
+  - Files: quote-widget.css, quote-widget.js
+
 ## User Preferences
 None specified yet.
 
