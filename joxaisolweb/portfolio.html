@@ -30,15 +30,6 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-  <!-- Fondo animado -->
-  <div class="animated-background" id="animated-bg">
-    <!-- Formas geométricas -->
-    <div class="geometric-shape shape-1 shape-triangle"></div>
-    <div class="geometric-shape shape-2 shape-circle"></div>
-    <div class="geometric-shape shape-3 shape-square"></div>
-    <div class="geometric-shape shape-4 shape-hexagon"></div>
-  </div>
-
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
@@ -48,165 +39,54 @@
       </button>
   
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="./portfolio.html" class="active">Portafolio</a></li>
         <li><a href="./index.html">Inicio</a></li>
         <li><a href="./index.html#servicios">Servicios</a></li>
         <li><a href="./about.html">Nosotros</a></li>
+        <li><a href="./portfolio.html" class="active">Portafolio</a></li>
         <li><a href="./index.html#contacto">Contacto</a></li>
       </ul>
   
+      <a class="cta-button" href="./index.html#contacto">Consulta Gratuita</a>
     </div>
   </nav>
-    <!-- Sistema de Partículas -->
-    <div class="portfolio-particles-bg" id="portfolioParticles"></div>
-  </section>
-
-  <script>
-    // Función para crear el sistema de partículas del portfolio
-    function createPortfolioParticles() {
-      const container = document.getElementById('portfolioParticles');
-      if (!container) return;
-
-      // Limpiar contenedor
-      container.innerHTML = '';
-
-      // Configuración de partículas
-      const config = {
-        small: { count: 40, sizeRange: [2, 5] },
-        medium: { count: 15, sizeRange: [25, 55] },
-        large: { count: 6, sizeRange: [220, 450] }
-      };
-
-      // Crear partículas pequeñas
-      for (let i = 0; i < config.small.count; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'pp-small';
-        
-        const size = Math.random() * (config.small.sizeRange[1] - config.small.sizeRange[0]) + config.small.sizeRange[0];
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDuration = `${Math.random() * 8 + 18}s`;
-        particle.style.animationDelay = `${Math.random() * 6}s`;
-        
-        container.appendChild(particle);
-      }
-
-      // Crear partículas medianas
-      for (let i = 0; i < config.medium.count; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'pp-medium';
-        
-        const size = Math.random() * (config.medium.sizeRange[1] - config.medium.sizeRange[0]) + config.medium.sizeRange[0];
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDuration = `${Math.random() * 10 + 22}s`;
-        particle.style.animationDelay = `${Math.random() * 5}s`;
-        
-        container.appendChild(particle);
-      }
-
-      // Crear orbes grandes
-      for (let i = 0; i < config.large.count; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'pp-large';
-        
-        const size = Math.random() * (config.large.sizeRange[1] - config.large.sizeRange[0]) + config.large.sizeRange[0];
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDuration = `${Math.random() * 12 + 28}s`;
-        particle.style.animationDelay = `${Math.random() * 4}s`;
-        
-        container.appendChild(particle);
-      }
-
-      // Crear formas geométricas
-      const geoShapes = [
-        { class: 'circle', pos: { top: '20%', left: '12%' } },
-        { class: 'triangle', pos: { top: '65%', left: '82%' } },
-        { class: 'square', pos: { top: '45%', left: '8%' } },
-        { class: 'hexagon', pos: { top: '30%', left: '88%' } }
-      ];
-
-      geoShapes.forEach((shape, index) => {
-        const geo = document.createElement('div');
-        geo.className = `pp-geo pp-geo-${shape.class}`;
-        geo.style.top = shape.pos.top;
-        geo.style.left = shape.pos.left;
-        geo.style.animationDelay = `${index * 2.5}s`;
-        container.appendChild(geo);
-      });
-
-      // Crear líneas de conexión
-      for (let i = 0; i < 6; i++) {
-        const line = document.createElement('div');
-        line.className = 'pp-line';
-        
-        line.style.width = `${Math.random() * 220 + 120}px`;
-        line.style.left = `${Math.random() * 75}%`;
-        line.style.top = `${Math.random() * 85 + 8}%`;
-        line.style.transform = `rotate(${Math.random() * 180}deg)`;
-        line.style.animationDelay = `${Math.random() * 3}s`;
-        
-        container.appendChild(line);
-      }
-    }
-
-    // Inicializar al cargar
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', createPortfolioParticles);
-    } else {
-      createPortfolioParticles();
-    }
-
-    // Recrear en resize (con debounce)
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(createPortfolioParticles, 300);
-    });
-  </script>
-  <!-- Hero -->
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="hero-title"><span class="highlight">Nuestro</span> Portafolio</h1>
-      <p class="hero-subtitle">Proyectos reales con impacto medible.</p>
-
-          <!-- AÑADIR ESTA CAPA (último elemento dentro del hero) -->
-    <div class="shapes-layer" aria-hidden="true">
-      <!-- Figura 1 con label -->
-      <div class="geom geom-1">
-        <div class="geom-shape shape-triangle"></div>
-        <div class="geom-label">IA Personalizada</div>
-      </div>
-      
-      <!-- Figura 2 con label -->
-      <div class="geom geom-2">
-        <div class="geom-shape shape-circle"></div>
-        <div class="geom-label">Desarrollo Web</div>
-      </div>
-      
-      <!-- Figura 3 con label -->
-      <div class="geom geom-3">
-        <div class="geom-shape shape-square"></div>
-        <div class="geom-label">Automatización</div>
-      </div>
-      
-      <!-- Figura 4 adicional (sin label) -->
-      <div class="geom geom-4">
-        <div class="geom-shape shape-hexagon"></div>
-      </div>
-      
-      <!-- Capa de partículas sutiles -->
-      <div class="particles-header" id="header-particles"></div>
-    </div>
-    </div>
-  </section>
+  <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                
+                <h1 class="hero-title">
+                    <span class="highlight">NUESTRO PORTAFOLIO</span>
+                    <br>CASOS DE ÉXITO
+                </h1>
+                <p class="hero-subtitle">
+                    Proyectos reales con impacto medible. Soluciones de IA, 
+                    automatización y desarrollo web que transforman empresas.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="document.querySelector('.portfolio').scrollIntoView({behavior: 'smooth'})">Ver Proyectos</button>
+                    <a href="./index.html#contacto" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Contacto</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div id="three-scene"></div>
+                <div class="floating-cards">
+                    <div class="card-float card-1">
+                        <i class="fas fa-brain"></i>
+                        <span>IA Personalizada</span>
+                    </div>
+                    <div class="card-float card-2">
+                        <i class="fas fa-robot"></i>
+                        <span>Automatización</span>
+                    </div>
+                    <div class="card-float card-3">
+                        <i class="fas fa-code"></i>
+                        <span>Desarrollo Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="particles-container" id="particles"></div>
+    </section>
 
   <!-- Portafolio -->
   <section class="portfolio">
@@ -397,76 +277,13 @@
             });
         });
 
-      // Partículas flotantes
-      const animatedBg = document.getElementById('animated-bg');
-      const particleCount = 50;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('floating-particle');
-        
-        const size = Math.random() * 8 + 2;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        
-        const duration = Math.random() * 20 + 15;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${Math.random() * 20}s`;
-        
-        const hue = 230 + Math.random() * 40; 
-        const saturation = 60 + Math.random() * 30;
-        const lightness = 55 + Math.random() * 20;
-        particle.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.7)`;
-        
-        animatedBg.appendChild(particle);
-      }
-    });
-    // Script para generar partículas dinámicas (opcional)
-document.addEventListener('DOMContentLoaded', function() {
-  const particlesContainer = document.getElementById('header-particles');
-  if (!particlesContainer) return;
-  
-  const particleCount = 15; // Reducido para rendimiento
-  
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    
-    // Tamaño aleatorio
-    const size = Math.random() * 4 + 1;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    
-    // Posición inicial aleatoria
-    particle.style.left = `${Math.random() * 100}%`;
-    
-    // Animación con duración y delay aleatorios
-    const duration = Math.random() * 20 + 15;
-    const delay = Math.random() * 5;
-    particle.style.animation = `particle-float ${duration}s linear ${delay}s infinite`;
-    
-    particlesContainer.appendChild(particle);
-  }
-});
-
-    // Navbar toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const menu = document.getElementById('nav-menu');
-  
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('open', !open);
-    });
-  
-    menu.addEventListener('click', (e) => {
-      if (e.target.closest('a')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('open');
-      }
     });
   </script>
+  
+  <!-- Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="./js/three-scene.js"></script>
+  <script src="./js/animations.js"></script>
   <script defer src="./js/main.js"></script>
 </body>
 </html>
