@@ -358,3 +358,389 @@
     image-rendering: -webkit-optimize-contrast;
   }
 }
+
+/* ==========================================
+   PROJECT TOUR PAGE RESPONSIVE
+========================================== */
+@media (max-width: 1024px) {
+  .main-header {
+    height: 350px;
+  }
+
+  .page-title {
+    font-size: 2.8em;
+  }
+
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  .projects-tour {
+    padding: 40px 30px;
+  }
+
+  .cards-container {
+    gap: 30px;
+  }
+
+  .project-card {
+    width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    height: 300px;
+  }
+
+  .page-title {
+    font-size: 2.2em;
+    margin-top: -30px;
+  }
+
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .nav-links-container {
+    display: none;
+  }
+
+  .projects-tour {
+    padding: 30px 20px;
+  }
+
+  .cards-container {
+    gap: 25px;
+  }
+
+  .project-card {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .modal-content {
+    margin: 5% auto;
+    padding: 25px;
+    width: 95%;
+  }
+
+  .video-container {
+    margin: 15px 0;
+  }
+
+  .modal-gallery-thumbs {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Geometric shapes - reduce sizes */
+  .cube {
+    width: 35px;
+    height: 35px;
+  }
+
+  .circle {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .triangle {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(89, 182, 239, 0.7);
+  }
+
+  .hexagon {
+    width: 35px;
+    height: 30px;
+  }
+
+  .line-connect {
+    width: 100px !important;
+  }
+
+  .ring {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header {
+    height: 250px;
+  }
+
+  .page-title {
+    font-size: 1.8em;
+    margin-top: -20px;
+  }
+
+  .projects-tour {
+    padding: 20px 15px;
+  }
+
+  .project-card {
+    width: 100%;
+  }
+
+  .card-image {
+    height: 180px;
+  }
+
+  .card-content h2 {
+    font-size: 1.3em;
+  }
+
+  .btn-see-more {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .close-btn {
+    font-size: 28px;
+  }
+
+  /* Hide complex geometric shapes on very small screens */
+  .geometric-background .shape {
+    display: none;
+  }
+
+  /* Keep only a few simple dots */
+  .dot:nth-child(-n+5) {
+    display: block;
+  }
+}
+
+/* ==========================================
+   QUOTE WIDGET MOBILE IMPROVEMENTS
+========================================== */
+@media (max-width: 768px) {
+  .quote-widget {
+    max-height: 90vh;
+  }
+
+  .quote-float-btn {
+    bottom: 70px;
+    right: 15px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .quote-float-btn i {
+    font-size: 24px;
+  }
+
+  #quote-form {
+    padding: 20px;
+  }
+
+  .form-section {
+    margin-bottom: 15px;
+  }
+
+  .form-section label {
+    font-size: 0.9em;
+  }
+
+  .form-section input,
+  .form-section select,
+  .form-section textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-quote-btn {
+    padding: 12px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote-widget {
+    width: 95%;
+    right: 2.5%;
+    bottom: 15px;
+  }
+
+  .quote-header h3 {
+    font-size: 1.1em;
+  }
+
+  #quote-form {
+    padding: 15px;
+  }
+
+  .info-box {
+    padding: 12px;
+  }
+
+  .radio-label,
+  .checkbox-label {
+    font-size: 0.9em;
+    padding: 6px;
+  }
+}
+
+/* ==========================================
+   ABOUT PAGE RESPONSIVE FIXES
+========================================== */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 8rem 0 4rem;
+  }
+
+  .about-content {
+    padding: 3rem 1.5rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================
+   PORTFOLIO PAGE RESPONSIVE FIXES
+========================================== */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 6rem 0 2.5rem;
+    min-height: 300px;
+  }
+
+  .portfolio {
+    padding: 3rem 0 4rem;
+  }
+
+  .portfolio-filters {
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .filter-button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .portfolio-grid {
+    padding: 0 1rem;
+  }
+
+  .portfolio-overlay h3 {
+    font-size: 1rem;
+  }
+
+  .portfolio-overlay p {
+    font-size: 0.85rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .portfolio-actions .btn-primary,
+  .portfolio-actions .btn-secondary {
+    min-width: 100px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================
+   FIX HORIZONTAL OVERFLOW
+========================================== */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  .container {
+    overflow-x: hidden;
+  }
+
+  /* Prevent grid blowout */
+  .services-grid,
+  .stats-grid,
+  .portfolio-grid,
+  .team-grid {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Fix any absolutely positioned elements */
+  .geometric-background,
+  .animated-background {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+}
+
+/* ==========================================
+   TOUCH FRIENDLY IMPROVEMENTS
+========================================== */
+@media (max-width: 768px) {
+  /* Increase touch target sizes */
+  .btn-primary,
+  .btn-secondary,
+  .filter-button,
+  .nav-menu a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Better spacing for touch */
+  .hero-buttons {
+    gap: 1.5rem;
+  }
+
+  .services-grid {
+    gap: 2rem;
+  }
+
+  /* Improve form inputs */
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+}
+
+/* ==========================================
+   LANDSCAPE MODE FIXES
+========================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-header {
+    height: 200px;
+  }
+
+  .page-title {
+    font-size: 1.8em;
+    margin-top: -10px;
+  }
+
+  .quote-widget {
+    max-height: 95vh;
+  }
+
+  .modal-content {
+    margin: 2% auto;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+}
