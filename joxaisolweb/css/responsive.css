@@ -29,12 +29,13 @@
 
   .hero-container {
     grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 6rem 2rem 4rem;
+    gap: 2rem;
+    padding: 5rem 2rem 3rem;
   }
 
   .hero-visual {
-    order: -1;
+    max-height: 300px;
+    min-height: 250px;
   }
 
   .services-grid {
@@ -177,12 +178,19 @@
 
   /* Hero Section */
   .hero {
-    padding: 8rem 0 4rem;
+    padding: 6rem 0 3rem;
     min-height: auto;
   }
 
   .hero-container {
     padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .hero-visual {
+    max-height: 250px;
+    min-height: 200px;
+    display: none; /* Ocultar visual 3D en móvil para priorizar contenido */
   }
 
   .hero-title {
