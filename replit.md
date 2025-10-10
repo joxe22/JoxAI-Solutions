@@ -172,6 +172,27 @@ The server sends no-cache headers to prevent browser caching issues during devel
     * All images, videos, iframes: max-width: 100%, auto height
     * Prevent any element from causing horizontal scroll
 
+  **Mobile Viewport & Navigation Fixes (October 2025):**
+  - **Viewport positioning corrected:**
+    * Removed order: -1 from .hero-visual that pushed content below viewport
+    * Adjusted hero-visual heights (max-height: 300px tablets, 250px mobile)
+    * Hidden hero-visual completely on mobile (display: none) to prioritize text content
+    * Reduced hero padding for better above-the-fold content visibility
+    * Content now visible immediately on mobile without scroll requirement
+  
+  - **Navbar mobile toggle implementation:**
+    * Complete toggle logic added to initNavigation() in main.js
+    * Controls menu open/close with aria-expanded attributes
+    * Body scroll lock when menu open, unlock when closed
+    * Auto-close on link click and outside click
+    * Removed duplicate inline scripts from project pages
+    * main.js now loaded on ALL pages (index, about, portfolio, survey, all project pages)
+  
+  - **Runtime error prevention:**
+    * Added null guard in initParticles() to prevent TypeError on pages without #particles
+    * Ensures all initializers run correctly regardless of page structure
+    * Clean console logs with no JavaScript errors across all pages
+
 ## User Preferences
 None specified yet.
 
