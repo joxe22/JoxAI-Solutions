@@ -224,24 +224,6 @@
     });
   </script>
 
-  <script>
-  const toggle = document.querySelector('.nav-toggle');
-  const menu = document.getElementById('nav-menu');
-  
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('open', !open);
-    });
-    
-    menu.addEventListener('click', (e) => {
-      if (e.target.closest('a')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('open');
-      }
-    });
-  }
-</script>
+  <script src="../js/main.js"></script>
 </body>
 </html>
