@@ -108,6 +108,8 @@ function initAnimations() {
 // ==========================================
 function initParticles() {
     const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return; // Salir si no existe el contenedor
+    
     const particleCount = 50;
     
     // Crear partículas
