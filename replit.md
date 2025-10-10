@@ -192,6 +192,11 @@ The server sends no-cache headers to prevent browser caching issues during devel
     * Added null guard in initParticles() to prevent TypeError on pages without #particles
     * Ensures all initializers run correctly regardless of page structure
     * Clean console logs with no JavaScript errors across all pages
+  
+  - **Navbar conflict resolution (October 10, 2025):**
+    * Removed duplicate inline navbar script from index.html that was interfering with main.js
+    * Navbar now works consistently across ALL pages including index.html
+    * Single source of truth: initNavigation() in main.js handles all navbar logic
 
 ## User Preferences
 None specified yet.

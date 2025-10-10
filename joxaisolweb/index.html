@@ -298,25 +298,6 @@
     <script src="./survey.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/animations.js"></script>
-    <!--SCRIPT PARA EL NUEVO NAVBAR-->
-    <script>
-        const toggle = document.querySelector('.nav-toggle');
-        const menu = document.getElementById('nav-menu');
-      
-        toggle.addEventListener('click', () => {
-          const open = toggle.getAttribute('aria-expanded') === 'true';
-          toggle.setAttribute('aria-expanded', String(!open));
-          menu.classList.toggle('open', !open);
-        });
-      
-        // Cierra el menú al navegar
-        menu.addEventListener('click', (e) => {
-          if (e.target.closest('a')) {
-            toggle.setAttribute('aria-expanded', 'false');
-            menu.classList.remove('open');
-          }
-        });
-      </script>
 
       <!--NUEVO CHATBOT-->
       <div id="chatbot-toggle-button">
