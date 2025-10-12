@@ -27,10 +27,10 @@ const projectsData = {
         description: 'Multi-format Support: PDF, DOCX, TXT, PNG, JPG (with OCR), Automatic Classification: TF-IDF + LightGBM baseline (upgradeable to Transformers), Field Extraction: Regex-based extraction of dates, amounts, IDs, entities, Active Learning: Human-in-the-loop labeling with uncertainty sampling, Explainability: Token importance and SHAP values for predictions, REST API: FastAPI service with OpenAPI documentation, Modern UI: React + Vite frontend with real-time analytics, Production Ready: Docker deployment, monitoring, batch processing',
         videoUrl: 'https://youtu.be/XZCiOvggLOY',
         gallery: [
-            './thumns_img/DocClass1.png',
-            './thumns_img/DocClass2.png',
-            './thumns_img/DocClass3.png',
-            './thumns_img/DocClass4.png'
+            '../thumns_img/DocClass1.png',
+            '../thumns_img/DocClass2.png',
+            '../thumns_img/DocClass3.png',
+            '../thumns_img/DocClass4.png'
         ]
     }
     // Añade más proyectos aquí:
