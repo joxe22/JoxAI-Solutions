@@ -38,10 +38,10 @@ const projectsData = {
         // Convertir URL de YouTube normal a URL de embed
         videoUrl: 'https://www.youtube.com/embed/XZCiOvggLOY',
         gallery: [
-            './thumbs_img/DocClass1.png',
-            './thumbs_img/DocClass2.png',
-            './thumbs_img/DocClass3.png',
-            './thumbs_img/DocClass4.png'
+            './thumbs_img/doclass1.png',
+            './thumbs_img/doclass2.png',
+            './thumbs_img/doclass3.png',
+            './thumbs_img/doclass4.png'
         ],
         previewUrl: null
     }
