@@ -6,7 +6,7 @@
  * - description: Descripción detallada
  * - videoUrl: URL de EMBED de YouTube (formato: https://www.youtube.com/embed/VIDEO_ID)
  * - gallery: Array de rutas de imágenes
- * - previewUrl: (Opcional) URL de la página de preview
+ * - demoUrl: (Opcional) URL del proyecto demo funcional
  */
 const projectsData = {
     'proyecto1': {
@@ -19,7 +19,7 @@ const projectsData = {
             './projects-img/zorg-3.jpg',
             './projects-img/zorg-4.jpg'
         ],
-        previewUrl: './previews/bankbot.html'
+        demoUrl: './previews/bankbot.html' // URL del proyecto demo
     },
     'proyecto2': {
         title: 'Plataforma B2B a Escala',
@@ -30,12 +30,11 @@ const projectsData = {
             './projects-img/b2b-2.jpg',
             './projects-img/b2b-3.jpg'
         ],
-        previewUrl: null // No tiene preview disponible
+        demoUrl: null // No tiene demo disponible
     },
     'proyecto3': {
         title: 'DocClassifier',
         description: 'Sistema de clasificación de documentos potenciado por IA con aprendizaje activo humano en el ciclo. Características principales: Soporte multi-formato (PDF, DOCX, TXT, PNG, JPG con OCR), Clasificación automática usando TF-IDF + LightGBM (actualizable a Transformers), Extracción de campos con Regex (fechas, montos, IDs, entidades), Aprendizaje activo con muestreo de incertidumbre, Explicabilidad con importancia de tokens y valores SHAP, API REST con FastAPI y documentación OpenAPI, UI moderna con React + Vite y analíticas en tiempo real, Listo para producción con Docker, monitoreo y procesamiento por lotes.',
-        // Convertir URL de YouTube normal a URL de embed
         videoUrl: 'https://www.youtube.com/embed/XZCiOvggLOY',
         gallery: [
             './thumbs_img/doclass1.png',
@@ -43,7 +42,7 @@ const projectsData = {
             './thumbs_img/doclass3.png',
             './thumbs_img/doclass4.png'
         ],
-        previewUrl: null
+        demoUrl: 'https://docclassifier.netlify.app/' // No tiene demo disponible
     }
 };
 
@@ -108,6 +107,20 @@ function inicializarEventosModal() {
             cerrarModal();
         }
     });
+    
+    // Manejar clicks en botones de demo
+    document.addEventListener('click', function(event) {
+        const demoBtn = event.target.closest('.btn-demo-project');
+        if (demoBtn) {
+            event.preventDefault();
+            const demoUrl = demoBtn.getAttribute('data-demo-url');
+            confirmarAperturDemo().then(accepted => {
+                if (accepted) {
+                    window.open(demoUrl, '_blank');
+                }
+            });
+        }
+    });
 }
 
 /**
@@ -156,13 +169,13 @@ function generarContenidoModal(project, projectId) {
         `;
     }).join('');
     
-    // Generar el botón de preview si existe
-    const previewButton = project.previewUrl 
-        ? `<a href="${project.previewUrl}" 
+    // Generar el botón de demo si existe
+    const demoButton = project.demoUrl 
+        ? `<a href="${project.demoUrl}" 
               target="_blank" 
-              class="btn-demo" 
-              style="margin-top: 15px; display: inline-block; text-decoration: none;">
-              <i class="fas fa-external-link-alt"></i> Ver Preview
+              class="btn-demo btn-demo-project" 
+              data-demo-url="${project.demoUrl}">
+              <i class="fas fa-rocket"></i> Ver Proyecto Demo
            </a>`
         : '';
     
@@ -190,8 +203,8 @@ function generarContenidoModal(project, projectId) {
             ${galeriaHTML}
         </div>
         
-        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
-            ${previewButton}
+        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            ${demoButton}
             <button class="btn-demo" onclick="mostrarGaleriaCompleta('${projectId}')">
                 <i class="fas fa-th-large"></i> Ver Galería Completa
             </button>
@@ -399,6 +412,127 @@ function mostrarError(mensaje) {
     alert(`Error: ${mensaje}`);
 }
 
+/**
+ * Muestra un disclaimer antes de abrir el proyecto demo
+ * @returns {Promise<boolean>} True si el usuario acepta continuar
+ */
+function confirmarAperturDemo() {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 20000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    const disclaimerBox = document.createElement('div');
+    disclaimerBox.style.cssText = `
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        border-radius: 15px;
+        padding: 40px;
+        max-width: 550px;
+        width: 90%;
+        box-shadow: 0 0 50px rgba(89, 182, 239, 0.4);
+        border: 2px solid rgba(89, 182, 239, 0.3);
+        text-align: center;
+        animation: slideInUp 0.3s ease;
+    `;
+    
+    disclaimerBox.innerHTML = `
+        <div style="margin-bottom: 25px;">
+            <i class="fas fa-info-circle" style="font-size: 60px; color: #59b6ef;"></i>
+        </div>
+        <h3 style="color: #59b6ef; margin: 0 0 20px 0; font-size: 1.8em;">
+            Aviso Importante
+        </h3>
+        <p style="color: #E0E0E0; line-height: 1.8; margin: 0 0 30px 0; font-size: 1.05em;">
+            Esta es una <strong style="color: #9ac8ee;">versión demo</strong> del proyecto. 
+            Puede contener funcionalidades limitadas o deshabilitadas con fines demostrativos. 
+            El proyecto final incluye todas las características y optimizaciones acordadas con el cliente.
+        </p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <button id="demo-accept" style="
+                background: linear-gradient(135deg, #59b6ef, #9ac8ee);
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 8px;
+                font-size: 1.05em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                box-shadow: 0 4px 15px rgba(89, 182, 239, 0.4);
+            ">
+                <i class="fas fa-check"></i> Entendido, Continuar
+            </button>
+            <button id="demo-cancel" style="
+                background: transparent;
+                color: #E0E0E0;
+                border: 2px solid rgba(224, 224, 224, 0.3);
+                padding: 12px 30px;
+                border-radius: 8px;
+                font-size: 1.05em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+            ">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+    `;
+    
+    overlay.appendChild(disclaimerBox);
+    document.body.appendChild(overlay);
+    
+    // Agregar efectos hover
+    const acceptBtn = disclaimerBox.querySelector('#demo-accept');
+    const cancelBtn = disclaimerBox.querySelector('#demo-cancel');
+    
+    acceptBtn.onmouseover = () => {
+        acceptBtn.style.transform = 'translateY(-2px)';
+        acceptBtn.style.boxShadow = '0 6px 20px rgba(89, 182, 239, 0.6)';
+    };
+    acceptBtn.onmouseout = () => {
+        acceptBtn.style.transform = 'translateY(0)';
+        acceptBtn.style.boxShadow = '0 4px 15px rgba(89, 182, 239, 0.4)';
+    };
+    
+    cancelBtn.onmouseover = () => {
+        cancelBtn.style.background = 'rgba(224, 224, 224, 0.1)';
+        cancelBtn.style.borderColor = 'rgba(224, 224, 224, 0.5)';
+    };
+    cancelBtn.onmouseout = () => {
+        cancelBtn.style.background = 'transparent';
+        cancelBtn.style.borderColor = 'rgba(224, 224, 224, 0.3)';
+    };
+    
+    // Retornar una promesa para manejar la acción del usuario
+    return new Promise((resolve) => {
+        acceptBtn.onclick = () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(overlay);
+                resolve(true);
+            }, 200);
+        };
+        
+        cancelBtn.onclick = () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(overlay);
+                resolve(false);
+            }, 200);
+        };
+    });
+}
+
 // ================== ANIMACIÓN DE FADE IN PARA EL MODAL ==================
 const style = document.createElement('style');
 style.textContent = `
@@ -408,6 +542,17 @@ style.textContent = `
         }
         to {
             opacity: 1;
+        }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
     
